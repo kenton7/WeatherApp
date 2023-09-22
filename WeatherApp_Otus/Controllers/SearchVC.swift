@@ -10,7 +10,6 @@ import CoreLocation
 
 class SearchVC: UIViewController {
     
-    private let background = Background()
     private let uiElements = SearchScreenViews()
     private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -46,7 +45,6 @@ class SearchVC: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         tap.cancelsTouchesInView = false // позволяет делать тап по ячейке. Настройка нужна, потому что есть жест
-        background.configure(on: view)
         uiElements.configureUIOn(view: view)
         view.addSubview(spinner)
         tableView.dataSource = self
@@ -70,7 +68,13 @@ class SearchVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        view.alpha = 1.0
         navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        view.alpha = 0.0
     }
     
     private func constraintsForTableView() {

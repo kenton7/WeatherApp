@@ -10,6 +10,9 @@ import UIKit
 class SearchScreenViews {
     
     //MARK: - Views
+    
+    private let background = Background()
+    
     let locationButton: UIButton = {
        let button = UIButton()
         button.frame = CGRect(x: 160, y: 100, width: 50, height: 50)
@@ -40,6 +43,7 @@ class SearchScreenViews {
     
     //MARK: - Constraints
     func configureUIOn(view: UIView) {
+        background.configure(on: view)
         view.addSubview(locationButton)
         view.addSubview(searchBar)
         

@@ -9,6 +9,8 @@ import UIKit
 
 class ForecastViews {
     
+    private let background = Background()
+    
     let weatherView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -191,6 +193,7 @@ class ForecastViews {
     
     
     func configure(on view: UIView) {
+        background.configure(on: view)
         view.addSubview(weatherView)
         view.addSubview(weatherImage)
         view.addSubview(maxTemperatureLabel)

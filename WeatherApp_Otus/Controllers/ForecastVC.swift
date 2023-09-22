@@ -10,7 +10,6 @@ import UIKit
 
 class ForecastVC: UIViewController {
     
-    private let background = Background()
     private let forecastViews = ForecastViews()
     private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -34,18 +33,9 @@ class ForecastVC: UIViewController {
         ]
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
-        background.configure(on: view)
         forecastViews.configure(on: view)
-        
-//        tableView = UITableView(frame: .zero, style: .plain)
-//        tableView.translatesAutoresizingMaskIntoConstraints = false
-//        tableView.showsVerticalScrollIndicator = false
-//        tableView.separatorColor = .clear
-//        tableView.backgroundColor = .clear
         tableView.delegate = self
         tableView.dataSource = self
-        //tableView.register(ForecastTableViewCell.self, forCellReuseIdentifier: ForecastTableViewCell.cellID)
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "BackgroundImage")!)
         view.addSubview(tableView)
         constraintsForTableView()
     }
@@ -53,6 +43,7 @@ class ForecastVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        view.alpha = 1.0
         updateViews()
     }
     
@@ -69,10 +60,10 @@ class ForecastVC: UIViewController {
             }
         }
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        view.alpha = 0.0
     }
     
     

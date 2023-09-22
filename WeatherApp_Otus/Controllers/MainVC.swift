@@ -11,7 +11,6 @@ import CoreLocation
 class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private let weatherUIElements = MainWeatherViews()
-    private let backView = Background()
     private var locationManager = CLLocationManager()
     private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -47,7 +46,6 @@ class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         NotificationCenter.default.addObserver(self, selector: #selector(showOfflineDeviceUI(notification:)), name: NSNotification.Name.connectivityStatus, object: nil)
         collectionView.dataSource = self
         collectionView.delegate = self
-        backView.configure(on: self.view)
         weatherUIElements.configureWeatherImage(on: self.view)
         view.addSubview(collectionView)
         view.addSubview(spinner)

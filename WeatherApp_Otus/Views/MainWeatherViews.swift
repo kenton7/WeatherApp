@@ -11,6 +11,7 @@ import Foundation
 class MainWeatherViews {
     
     //MARK: -- UI Elements
+    private let background = Background()
     
     var weatherImage: UIImageView = {
         let image = UIImageView()
@@ -248,6 +249,8 @@ class MainWeatherViews {
     
     //MARK: -- Конфигурация элементов
     func configureWeatherImage(on view: UIView) {
+        
+        background.configure(on: view)
         
         view.addSubview(weatherImage)
         view.addSubview(weatherDescription)
