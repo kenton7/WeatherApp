@@ -17,8 +17,8 @@ class ForecastManager {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data else { return }
             if let forecast = try? JSONDecoder().decode(Forecast.self, from: data) {
-                let calendar = Calendar.current
-                let df = DateFormatter()
+//                let calendar = Calendar.current
+//                let df = DateFormatter()
 
                 var tupleForecastData = [ForecastModel]()
                 

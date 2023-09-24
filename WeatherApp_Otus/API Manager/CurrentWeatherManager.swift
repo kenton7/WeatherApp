@@ -10,16 +10,9 @@ import Foundation
 class CurrentWeatherManager {
     
     static let shared = CurrentWeatherManager()
-    /*
-     https://api.openweathermap.org/data/2.5/weather?lat=55.75222&lon=37.61556&&units=metric&lang=ru&appid=bf6b4e4a53e89885bc70f0045874c122
-     */
     
-    /*
-     https://api.openweathermap.org/data/2.5/forecast?lat=55.75222&lon=7.61556&units=metric&lang=ru&appid=bf6b4e4a53e89885bc70f0045874c122
-     */
     private var urlString: String {
         return "https://api.openweathermap.org/data/2.5/weather?lat=\(UserDefaults.standard.double(forKey: "latitude"))&lon=\(UserDefaults.standard.double(forKey: "longtitude"))&units=metric&lang=ru&appid=\(APIKey.APIKey)"
-        
     }
     
     func getWeather(latitude: Double, longtitude: Double, completion: @escaping ((ForecastModel)) -> Void) {

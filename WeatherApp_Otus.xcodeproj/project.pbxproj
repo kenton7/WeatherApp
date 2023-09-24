@@ -13,6 +13,8 @@
 		09A50DF32ABC3DA400A43793 /* ForecastViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A50DF22ABC3DA400A43793 /* ForecastViews.swift */; };
 		09A50DF52ABC489600A43793 /* ForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A50DF42ABC489600A43793 /* ForecastTableViewCell.swift */; };
 		09A50DF72ABC73C800A43793 /* ForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A50DF62ABC73C800A43793 /* ForecastModel.swift */; };
+		09A50E092ABECDFC00A43793 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 09A50E082ABECDFC00A43793 /* Realm */; };
+		09A50E0B2ABECDFC00A43793 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 09A50E0A2ABECDFC00A43793 /* RealmSwift */; };
 		09B150BD2AAF52DA00B5DA0E /* ForecastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B150BC2AAF52DA00B5DA0E /* ForecastManager.swift */; };
 		09B150BF2AAF624400B5DA0E /* WeatherImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B150BE2AAF624400B5DA0E /* WeatherImages.swift */; };
 		09C143012ABB1D9700C06251 /* SearchScreenViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C143002ABB1D9700C06251 /* SearchScreenViews.swift */; };
@@ -73,6 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09A50E0B2ABECDFC00A43793 /* RealmSwift in Frameworks */,
+				09A50E092ABECDFC00A43793 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +190,10 @@
 			dependencies = (
 			);
 			name = WeatherApp_Otus;
+			packageProductDependencies = (
+				09A50E082ABECDFC00A43793 /* Realm */,
+				09A50E0A2ABECDFC00A43793 /* RealmSwift */,
+			);
 			productName = WeatherApp_Otus;
 			productReference = 09FC835D2AAB24790059769A /* WeatherApp_Otus.app */;
 			productType = "com.apple.product-type.application";
@@ -214,6 +222,9 @@
 				Base,
 			);
 			mainGroup = 09FC83542AAB24790059769A;
+			packageReferences = (
+				09A50E072ABECDFC00A43793 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 09FC835E2AAB24790059769A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -404,7 +415,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_TEAM = 44S95Z526W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherApp_Otus/Info.plist;
@@ -431,7 +442,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_TEAM = 44S95Z526W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherApp_Otus/Info.plist;
@@ -474,6 +485,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		09A50E072ABECDFC00A43793 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.42.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		09A50E082ABECDFC00A43793 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 09A50E072ABECDFC00A43793 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		09A50E0A2ABECDFC00A43793 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 09A50E072ABECDFC00A43793 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 09FC83552AAB24790059769A /* Project object */;
 }

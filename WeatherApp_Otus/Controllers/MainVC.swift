@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 
-class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private let weatherUIElements = MainWeatherViews()
     private var locationManager = CLLocationManager()

@@ -7,8 +7,7 @@
 
 import UIKit
 
-
-class ForecastVC: UIViewController {
+final class ForecastVC: UIViewController {
     
     private let forecastViews = ForecastViews()
     private var tableView: UITableView = {
@@ -48,7 +47,6 @@ class ForecastVC: UIViewController {
     }
     
     private func updateViews() {
-        
         for data in forecastModel {
             DispatchQueue.main.async {
                 self.forecastViews.maxTemperatureLabel.text = "\(Int(self.forecastModel[data.selectedItem ?? 0].tempMax?.rounded() ?? 0.0))°"
