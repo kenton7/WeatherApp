@@ -204,8 +204,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "175"
             endingLineNumber = "175"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
-            landmarkType = "7">
+            landmarkName = "MainVC"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -730,22 +730,6 @@
             startingLineNumber = "77"
             endingLineNumber = "77"
             landmarkName = "updateViews()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A332AE2D-44BE-45B6-9014-6A2CFBAB5AF2"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherApp_Otus/Controllers/SearchVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "320"
-            endingLineNumber = "320"
-            landmarkName = "searchBarSearchButtonClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

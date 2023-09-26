@@ -317,7 +317,17 @@ extension SearchVC: UISearchBarDelegate {
         GeocodingManager.shared.search(city: searchingCity) { [weak self] forecastModel in
             guard let self = self else { return }
             
+            //Проверяем добавил ли юзер такой город или нет
             DispatchQueue.main.async {
+                for data in self.forecastRealm! {
+                    if data.cityName == searchingCity {
+                        let alert = UIAlertController(title: "Ошибка", message: "Такой город уже добавлен", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "ОК", style: .cancel))
+                        self.present(alert, animated: true)
+                        return
+                    }
+                }
+                
                 try! self.realm.write {
                     self.realm.add(ForecastRealm(cityName: forecastModel.cityName ?? "",
                                                  dayOrNight: forecastModel.dayOrNight ?? "d",
@@ -337,6 +347,28 @@ extension SearchVC: UISearchBarDelegate {
                     self.spinner.isHidden = true
                 }
             }
+
+            
+//            DispatchQueue.main.async {
+//                try! self.realm.write {
+//                    self.realm.add(ForecastRealm(cityName: forecastModel.cityName ?? "",
+//                                                 dayOrNight: forecastModel.dayOrNight ?? "d",
+//                                                 weatherDescription: forecastModel.weatherDescription ?? "",
+//                                                 id: forecastModel.id ?? 803,
+//                                                 temp: forecastModel.temp ?? 0.0,
+//                                                 latitude: forecastModel.latitude ?? 0.0,
+//                                                 longitude: forecastModel.longitude ?? 0.0,
+//                                                 tempMin: forecastModel.tempMin ?? 0.0,
+//                                                 tempMax: forecastModel.tempMax ?? 0.0,
+//                                                 pressure: forecastModel.pressure ?? 0.0,
+//                                                 humidity: forecastModel.humidity ?? 0,
+//                                                 windSpeed: forecastModel.windSpeed ?? 0.0,
+//                                                 selectedItem: forecastModel.selectedItem ?? 0,
+//                                                 date: forecastModel.date ?? ""))
+//                    self.tableView.reloadData()
+//                    self.spinner.isHidden = true
+//                }
+//            }
             //self?.weatherData.append(forecastModel)
         }
         searchBar.text = ""
