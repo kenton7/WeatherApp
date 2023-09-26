@@ -8,7 +8,7 @@
 import UIKit
 
 
-class TabBarController: UITabBarController {
+final class TabBarController: UITabBarController {
     
     private let tabBarView = TabBarView()
     
@@ -18,9 +18,9 @@ class TabBarController: UITabBarController {
         self.delegate = self
         
         self.setValue(tabBarView, forKey: "tabBar")
-        generateTabBar()
+        //generateTabBar()
+        setupVCs()
         self.selectedIndex = 0
-        //setTabBarAppearence()
     }
     
     
@@ -29,12 +29,30 @@ class TabBarController: UITabBarController {
         
     }
     
-    func generateTabBar() {
+//    func generateTabBar() {
+//        viewControllers = [
+//            generateVC(viewController: MainVC(), image: UIImage(systemName: "house.fill")!, title: nil),
+//            generateVC(viewController: SearchVC(), image: UIImage(systemName: "magnifyingglass")!, title: nil),
+//            generateVC(viewController: SettingsVC(), image: UIImage(systemName: "gear")!, title: nil)
+//        ]
+//    }
+    
+    func setupVCs() {
         viewControllers = [
-            generateVC(viewController: MainVC(), image: UIImage(systemName: "house.fill")!, title: nil),
-            generateVC(viewController: SearchVC(), image: UIImage(systemName: "magnifyingglass")!, title: nil),
-            generateVC(viewController: SettingsVC(), image: UIImage(systemName: "gear")!, title: nil)
+            createNavController(for: MainVC(), image: UIImage(systemName: "house.fill")!),
+            createNavController(for: SearchVC(), image: UIImage(systemName: "magnifyingglass")!),
+            createNavController(for: SettingsVC(), image: UIImage(systemName: "gear")!)
         ]
+    }
+    
+    fileprivate func createNavController(for rootViewController: UIViewController,
+                                         image: UIImage) -> UIViewController {
+        let navController = UINavigationController(rootViewController: rootViewController)
+        navController.tabBarItem.image = image
+        navController.tabBarItem.title = nil
+        navController.navigationBar.prefersLargeTitles = false
+        rootViewController.navigationItem.title = title
+        return navController
     }
     
     private func generateVC(viewController: UIViewController, image: UIImage, title: String?) -> UIViewController {

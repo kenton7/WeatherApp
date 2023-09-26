@@ -61,6 +61,7 @@ final class ForecastVC: UIViewController {
             self.weather = forecast
         }
         updateViews()
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     private var weather = [ForecastModel]() {

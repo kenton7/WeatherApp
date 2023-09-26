@@ -254,7 +254,6 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let forecastVC = ForecastVC()
-        
         if let transferData = forecastRealm?[indexPath.section] {
             forecastVC.coordinates = Coordinates(latitude: transferData.latitude, longitude: transferData.longitude)
             //forecastVC.coordinates?.longitude = transferData.longitude
@@ -277,6 +276,7 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
                 cityName: transferData.cityName,
                 date: transferData.date))
         }
+        forecastVC.hidesBottomBarWhenPushed = false
         navigationController?.pushViewController(forecastVC, animated: true)
     }
     
