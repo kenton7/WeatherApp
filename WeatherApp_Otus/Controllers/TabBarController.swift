@@ -10,12 +10,19 @@ import UIKit
 
 class TabBarController: UITabBarController {
     
+    private let tabBarView = TabBarView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.delegate = self
+        
+        self.setValue(tabBarView, forKey: "tabBar")
         generateTabBar()
-        setTabBarAppearence()
+        self.selectedIndex = 0
+        //setTabBarAppearence()
     }
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -34,28 +41,12 @@ class TabBarController: UITabBarController {
         viewController.tabBarItem.image = image
         return viewController
     }
-    
-    private func setTabBarAppearence() {
-        let positionOnX: CGFloat = 10
-        let positionOnY: CGFloat = 14
-        let width = tabBar.bounds.width - positionOnX * 2
-        let height = tabBar.bounds.height + positionOnY * 2
-        
-        let roundLayer = CAShapeLayer()
-        let bezierPath = UIBezierPath(roundedRect: CGRect(x: positionOnX,
-                                                          y: tabBar.bounds.minY - positionOnY,
-                                                          width: width,
-                                                          height: height),
-                                      cornerRadius: height / 2)
-        
-        roundLayer.path = bezierPath.cgPath
-        tabBar.layer.insertSublayer(roundLayer, at: 0)
-        tabBar.itemWidth = width / 5
-        tabBar.itemPositioning = .centered
+}
 
-        
-        roundLayer.fillColor = UIColor.backgroundColorTabBar.cgColor
-        tabBar.tintColor = UIColor.tabBarItemSelected
-        tabBar.unselectedItemTintColor = UIColor.tabBarItemNonSelected
+extension TabBarController: UITabBarControllerDelegate {
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        if let tabBar = tabBar as? TabBarView {
+            tabBar.updateCurveForTappedIndex()
+        }
     }
 }
