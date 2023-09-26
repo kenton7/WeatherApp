@@ -22,7 +22,7 @@ class SearchTableViewCell: UITableViewCell {
     
     let cityLabel: UILabel = {
         let label = UILabel()
-        label.text = "Москва"
+        label.text = "--"
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
@@ -53,7 +53,7 @@ class SearchTableViewCell: UITableViewCell {
         return label
     }()
     
-    let stackView: UIStackView = {
+    private let stackView: UIStackView = {
        let view = UIStackView()
         view.axis = .vertical
         view.alignment = .leading

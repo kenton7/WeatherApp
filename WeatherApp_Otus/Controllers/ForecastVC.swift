@@ -79,7 +79,7 @@ final class ForecastVC: UIViewController {
                 self.forecastViews.minTemperaureLabel.text = " / \(Int(self.forecastModel.last?.tempMin?.rounded() ?? 0.0))°"
                 self.forecastViews.weatherImage.image = WeatherImages.shared.weatherImages(id: self.forecastModel.last?.id ?? 803, pod: self.forecastModel.last?.dayOrNight)
                 self.forecastViews.humidityLabel.text = "\(self.forecastModel.last?.humidity ?? 0)%"
-                self.forecastViews.pressureLabel.text = "\(Int((self.forecastModel.last?.pressure?.rounded() ?? 0) * 0.750064)) мм.рт.ст."
+                self.forecastViews.pressureLabel.text = "\(Int((self.forecastModel.last?.pressure?.rounded() ?? 0))) мм.рт.ст."
                 self.forecastViews.windLabel.text = "\(Int(self.forecastModel.last?.windSpeed?.rounded() ?? 0)) м/с"
             }
         }

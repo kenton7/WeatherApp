@@ -22,9 +22,7 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         collectionView.register(WeatherCollectionViewCell.self, forCellWithReuseIdentifier: WeatherCollectionViewCell.cellID)
         return collectionView
     }()
-    
-    var long = 0.0
-    var lat = 0.0
+
     private lazy var spinner: CustomLoaderView = {
         let spinner = CustomLoaderView(squareLength: 100)
         spinner.isHidden = true
@@ -44,8 +42,7 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(showOfflineDeviceUI(notification:)), name: NSNotification.Name.connectivityStatus, object: nil)
+
         collectionView.dataSource = self
         collectionView.delegate = self
         weatherUIElements.configureWeatherImage(on: self.view)
@@ -86,15 +83,6 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         ])
     }
     
-    @objc func showOfflineDeviceUI(notification: Notification) {
-        if NetworkMonitor.shared.isConnected {
-        } else {
-            let alert = UIAlertController(title: "Ошибка", message: "Вы не подключены к интернету", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "ОК", style: .cancel))
-            present(alert, animated: true)
-        }
-    }
-    
     //MARK: -- Добавляем действие на кнопки
     @objc private func refreshButtonPressed() {
         DispatchQueue.main.async {
@@ -120,10 +108,11 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
             DispatchQueue.main.async {
                 self?.weatherUIElements.weatherImage.image = WeatherImages.shared.weatherImages(id: weatherModel.id ?? 803 , pod: calendar.component(.hour, from: Date()) >= 20 ? "n" : "d")
                 self?.weatherUIElements.temperatureLabel.text = "\(Int(weatherModel.temp?.rounded() ?? 0.0))°"
-                self?.weatherUIElements.pressureLabel.text = "\(Int((weatherModel.pressure ?? 0.0) * 0.750064)) мм рт.ст."
+                self?.weatherUIElements.pressureLabel.text = "\(Int((weatherModel.pressure ?? 0.0))) мм рт.ст."
+                print(Int(weatherModel.pressure ?? 0.0))
                 self?.weatherUIElements.humidityLabel.text = "\(Int(weatherModel.humidity ?? 0))%"
                 self?.weatherUIElements.windLabel.text = "\(Int(weatherModel.windSpeed?.rounded() ?? 0.0)) м/с"
-                self?.weatherUIElements.weatherDescription.text = weatherModel.weatherDescription!.prefix(1).uppercased() + ((weatherModel.weatherDescription!.lowercased().dropFirst()))
+                self?.weatherUIElements.weatherDescription.text = (weatherModel.weatherDescription?.prefix(1).uppercased() ?? "") + ((weatherModel.weatherDescription?.lowercased().dropFirst() ?? ""))
                 self?.weatherUIElements.cityLabel.text = weatherModel.cityName
                 self?.spinner.isHidden = true
                 self?.spinner.stopAnimation()

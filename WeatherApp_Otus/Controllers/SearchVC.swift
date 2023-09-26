@@ -167,13 +167,18 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
                     self.forecastRealm?[indexPath.section].windSpeed = forecast.windSpeed ?? 0.0
                     self.forecastRealm?[indexPath.section].date = forecast.date ?? ""
                 }
+                cell.cityLabel.text = self.forecastRealm?[indexPath.section].cityName
+                cell.weatherDescriptionLabel.text = (self.forecastRealm?[indexPath.section].weatherDescription.prefix(1).uppercased())! + "\(self.forecastRealm![indexPath.section].weatherDescription.lowercased().dropFirst())"
+                cell.weatherImage.image = WeatherImages.shared.weatherImages(id: self.forecastRealm?[indexPath.section].id ?? 803, pod: self.forecastRealm?[indexPath.section].dayOrNight)
+                cell.temperatureLabel.text = "\(Int(self.forecastRealm?[indexPath.section].temp.rounded() ?? 0))°"
             }
         }
-        cell.cityLabel.text = self.forecastRealm?[indexPath.section].cityName
-        cell.weatherDescriptionLabel.text = (self.forecastRealm?[indexPath.section].weatherDescription.prefix(1).uppercased())! + "\(self.forecastRealm![indexPath.section].weatherDescription.lowercased().dropFirst())"
+//        cell.cityLabel.text = self.forecastRealm?[indexPath.section].cityName
+//        cell.weatherDescriptionLabel.text = (self.forecastRealm?[indexPath.section].weatherDescription.prefix(1).uppercased())! + "\(self.forecastRealm![indexPath.section].weatherDescription.lowercased().dropFirst())"
+//        cell.weatherImage.image = WeatherImages.shared.weatherImages(id: self.forecastRealm?[indexPath.section].id ?? 803, pod: self.forecastRealm?[indexPath.section].dayOrNight)
+//        cell.temperatureLabel.text = "\(Int(self.forecastRealm?[indexPath.section].temp.rounded() ?? 0))°"
+        
         //                        cell.weatherDescriptionLabel.text = self.forecastRealm![indexPath.section].description.prefix(1).uppercased() + self.forecastRealm![indexPath.section].description.lowercased().dropFirst()
-        cell.weatherImage.image = WeatherImages.shared.weatherImages(id: self.forecastRealm?[indexPath.section].id ?? 803, pod: self.forecastRealm?[indexPath.section].dayOrNight)
-        cell.temperatureLabel.text = "\(Int(self.forecastRealm?[indexPath.section].temp.rounded() ?? 0))°"
         //cell.cityLabel.text = weatherData[indexPath.section].cityName
         //        cell.weatherDescriptionLabel.text = weatherData[indexPath.section].description!.prefix(1).uppercased() + weatherData[indexPath.section].description!.lowercased().dropFirst()
         //        cell.weatherImage.image = WeatherImages.shared.weatherImages(id: Int(weatherData[indexPath.section].id ?? 803), pod: weatherData[indexPath.section].dayOrNight)

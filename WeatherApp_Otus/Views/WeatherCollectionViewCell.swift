@@ -11,7 +11,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     
     static let cellID = "WeatherCollectionViewCell"
     
-    let mainImageView: UIImageView = {
+    private let mainImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.backgroundColor = .backgroundColorTabBar
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -47,7 +47,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let stackView: UIStackView = {
+    private let stackView: UIStackView = {
        let view = UIStackView()
         view.axis = .vertical
         view.alignment = .center

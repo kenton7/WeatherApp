@@ -85,7 +85,7 @@ class MainWeatherViews {
         return label
     }()
     
-    let pressureImage: UIImageView = {
+    private let pressureImage: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(named: "pressure")
@@ -173,7 +173,7 @@ class MainWeatherViews {
     }()
     
     //MARK: -- Stack Views
-    let detailStackView: UIStackView = {
+    private let detailStackView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .center
@@ -184,7 +184,7 @@ class MainWeatherViews {
         return view
     }()
     
-    let weatherDataStackView: UIStackView = {
+    private let weatherDataStackView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .center
@@ -194,18 +194,7 @@ class MainWeatherViews {
         return view
     }()
     
-    let visibilityStackView: UIStackView = {
-        let view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.alignment = .center
-        view.axis = .vertical
-        view.backgroundColor = .clear
-        view.layer.cornerRadius = 8
-        view.spacing = 8
-        return view
-    }()
-    
-    let humidityStackView: UIStackView = {
+    private let visibilityStackView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .center
@@ -216,7 +205,18 @@ class MainWeatherViews {
         return view
     }()
     
-    let winddStackView: UIStackView = {
+    private let humidityStackView: UIStackView = {
+        let view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.alignment = .center
+        view.axis = .vertical
+        view.backgroundColor = .clear
+        view.layer.cornerRadius = 8
+        view.spacing = 8
+        return view
+    }()
+    
+    private let winddStackView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .center

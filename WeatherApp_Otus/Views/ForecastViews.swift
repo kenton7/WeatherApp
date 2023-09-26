@@ -19,7 +19,7 @@ class ForecastViews {
         return view
     }()
     
-    let weatherStackView: UIStackView = {
+    private let weatherStackView: UIStackView = {
        let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .horizontal
@@ -59,7 +59,7 @@ class ForecastViews {
         return label
     }()
     
-    let pressureImage: UIImageView = {
+    private let pressureImage: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(named: "pressure")
@@ -147,7 +147,7 @@ class ForecastViews {
     }()
     
     //MARK: -- Stack Views
-    let detailStackView: UIStackView = {
+    private let detailStackView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .center
@@ -158,7 +158,7 @@ class ForecastViews {
         return view
     }()
     
-    let pressureStackView: UIStackView = {
+    private let pressureStackView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .center
@@ -169,7 +169,7 @@ class ForecastViews {
         return view
     }()
     
-    let humidityStackView: UIStackView = {
+    private let humidityStackView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .center
@@ -180,7 +180,7 @@ class ForecastViews {
         return view
     }()
     
-    let winddStackView: UIStackView = {
+    private let winddStackView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .center
