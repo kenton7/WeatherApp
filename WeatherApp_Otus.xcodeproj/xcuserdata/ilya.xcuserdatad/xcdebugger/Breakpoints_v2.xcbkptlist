@@ -204,8 +204,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "186"
             endingLineNumber = "186"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "MainVC"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -282,10 +282,10 @@
             filePath = "WeatherApp_Otus/Controllers/MainVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "MainVC"
-            landmarkType = "3">
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "collectionView(_:cellForItemAt:)"
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "7F0F35A7-6B0B-4D20-9031-398C026E873E - ecac411bd00ac8d"
@@ -330,8 +330,8 @@
             filePath = "WeatherApp_Otus/Controllers/MainVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "getForecast()"
             landmarkType = "7">
             <Locations>
@@ -378,307 +378,8 @@
             filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "getForecastWithCoordinates(latitude:longtitude:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B5E8A060-D3DB-4694-9629-F13FD6826638"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "getForecastWithCoordinates(latitude:longtitude:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B5E8A060-D3DB-4694-9629-F13FD6826638 - 4a4e3ce22176ab3a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WeatherApp_Otus.ForecastManager.getForecastWithCoordinates(latitude: Swift.Double, longtitude: Swift.Double, completion: ((date: Swift.Optional&lt;Swift.String&gt;, iconName: Swift.Optional&lt;Swift.String&gt;, forecast: Swift.Array&lt;(Swift.String, Swift.String, Swift.Optional&lt;Swift.Double&gt;)&gt;)) -&gt; ()) -&gt; ()"
-                  moduleName = "WeatherApp_Otus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/API%20Manager/ForecastManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
-                  offsetFromSymbolStart = "15100">
-               </Location>
-               <Location
-                  uuid = "B5E8A060-D3DB-4694-9629-F13FD6826638 - b25389482256c491"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WeatherApp_Otus.ForecastManager.getForecastWithCoordinates(latitude: Swift.Double, longtitude: Swift.Double, completion: ((date: Swift.Optional&lt;Swift.String&gt;, iconName: Swift.Optional&lt;Swift.String&gt;, forecast: Swift.Array&lt;(Swift.String, Swift.String, Swift.Optional&lt;Swift.Double&gt;, Swift.Optional&lt;Swift.Int&gt;)&gt;)) -&gt; ()) -&gt; ()"
-                  moduleName = "WeatherApp_Otus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/API%20Manager/ForecastManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
-                  offsetFromSymbolStart = "15092">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3BBE9F55-6E86-407F-B9D8-2674BC26F7C7"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "getForecastWithCoordinates(latitude:longtitude:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "3BBE9F55-6E86-407F-B9D8-2674BC26F7C7 - ba5d020cd33687dd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WeatherApp_Otus.ForecastManager.getForecastWithCoordinates(latitude: Swift.Double, longtitude: Swift.Double, completion: (Swift.Array&lt;(Swift.String, Swift.String, Swift.Double, Swift.Int)&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "WeatherApp_Otus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/API%20Manager/ForecastManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "3940">
-               </Location>
-               <Location
-                  uuid = "3BBE9F55-6E86-407F-B9D8-2674BC26F7C7 - ba5d020cd33687dd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WeatherApp_Otus.ForecastManager.getForecastWithCoordinates(latitude: Swift.Double, longtitude: Swift.Double, completion: (Swift.Array&lt;(Swift.String, Swift.String, Swift.Double, Swift.Int)&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "WeatherApp_Otus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/API%20Manager/ForecastManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "5884">
-               </Location>
-               <Location
-                  uuid = "3BBE9F55-6E86-407F-B9D8-2674BC26F7C7 - ba5d020cd33687be"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WeatherApp_Otus.ForecastManager.getForecastWithCoordinates(latitude: Swift.Double, longtitude: Swift.Double, completion: (Swift.Array&lt;(Swift.String, Swift.String, Swift.Double, Swift.Int)&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "WeatherApp_Otus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/API%20Manager/ForecastManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "5880">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F2F9E423-E3B7-483A-A7C6-35746710CAEE"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "getForecastWithCoordinates(latitude:longtitude:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "F2F9E423-E3B7-483A-A7C6-35746710CAEE - 5bf44c4e7fc7e91c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (WeatherApp_Otus.List) -&gt; Swift.Bool in closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WeatherApp_Otus.ForecastManager.getForecastWithCoordinates(latitude: Swift.Double, longtitude: Swift.Double, completion: (Swift.Array&lt;(Swift.String, Swift.Double, Swift.Int)&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "WeatherApp_Otus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/API%20Manager/ForecastManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "46"
-                  endingLineNumber = "46"
-                  offsetFromSymbolStart = "344">
-               </Location>
-               <Location
-                  uuid = "F2F9E423-E3B7-483A-A7C6-35746710CAEE - 5bf44c4e7fc7e93d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (WeatherApp_Otus.List) -&gt; Swift.Bool in closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WeatherApp_Otus.ForecastManager.getForecastWithCoordinates(latitude: Swift.Double, longtitude: Swift.Double, completion: (Swift.Array&lt;(Swift.String, Swift.Double, Swift.Int)&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "WeatherApp_Otus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/API%20Manager/ForecastManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "600">
-               </Location>
-               <Location
-                  uuid = "F2F9E423-E3B7-483A-A7C6-35746710CAEE - 5bf44c4e7fc7e93d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (WeatherApp_Otus.List) -&gt; Swift.Bool in closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WeatherApp_Otus.ForecastManager.getForecastWithCoordinates(latitude: Swift.Double, longtitude: Swift.Double, completion: (Swift.Array&lt;(Swift.String, Swift.Double, Swift.Int)&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "WeatherApp_Otus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/API%20Manager/ForecastManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "780">
-               </Location>
-               <Location
-                  uuid = "F2F9E423-E3B7-483A-A7C6-35746710CAEE - 5bf44c4e7fc7eab9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (WeatherApp_Otus.List) -&gt; Swift.Bool in closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WeatherApp_Otus.ForecastManager.getForecastWithCoordinates(latitude: Swift.Double, longtitude: Swift.Double, completion: (Swift.Array&lt;(Swift.String, Swift.Double, Swift.Int)&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "WeatherApp_Otus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/API%20Manager/ForecastManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "812">
-               </Location>
-               <Location
-                  uuid = "F2F9E423-E3B7-483A-A7C6-35746710CAEE - 5bf44c4e7fc7eab9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (WeatherApp_Otus.List) -&gt; Swift.Bool in closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WeatherApp_Otus.ForecastManager.getForecastWithCoordinates(latitude: Swift.Double, longtitude: Swift.Double, completion: (Swift.Array&lt;(Swift.String, Swift.Double, Swift.Int)&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "WeatherApp_Otus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/API%20Manager/ForecastManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "632">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "321E22AB-1114-4B2A-84DC-12A069A0832E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "getForecastWithCoordinates(latitude:longtitude:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "105F3431-C873-4378-80BA-5037285B019E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "getForecastWithCoordinates(latitude:longtitude:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "105F3431-C873-4378-80BA-5037285B019E - 5bf44c4e7fc7e55d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (WeatherApp_Otus.List) -&gt; Swift.Bool in closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WeatherApp_Otus.ForecastManager.getForecastWithCoordinates(latitude: Swift.Double, longtitude: Swift.Double, completion: (Swift.Array&lt;(Swift.String, Swift.Double, Swift.Int)&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "WeatherApp_Otus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/API%20Manager/ForecastManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "79"
-                  endingLineNumber = "79"
-                  offsetFromSymbolStart = "1840">
-               </Location>
-               <Location
-                  uuid = "105F3431-C873-4378-80BA-5037285B019E - 5bf44c4e7fc7e55d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (WeatherApp_Otus.List) -&gt; Swift.Bool in closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WeatherApp_Otus.ForecastManager.getForecastWithCoordinates(latitude: Swift.Double, longtitude: Swift.Double, completion: (Swift.Array&lt;(Swift.String, Swift.Double, Swift.Int)&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "WeatherApp_Otus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/API%20Manager/ForecastManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "79"
-                  endingLineNumber = "79"
-                  offsetFromSymbolStart = "2024">
-               </Location>
-               <Location
-                  uuid = "105F3431-C873-4378-80BA-5037285B019E - 5bf44c4e7fc7e55d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (WeatherApp_Otus.List) -&gt; Swift.Bool in closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WeatherApp_Otus.ForecastManager.getForecastWithCoordinates(latitude: Swift.Double, longtitude: Swift.Double, completion: (Swift.Array&lt;(Swift.String, Swift.Double, Swift.Int)&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "WeatherApp_Otus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/API%20Manager/ForecastManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "79"
-                  endingLineNumber = "79"
-                  offsetFromSymbolStart = "1984">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2CE53576-11D2-4050-A689-65C31ADD9968"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "getForecastWithCoordinates(latitude:longtitude:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -693,40 +394,8 @@
             filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "getForecastWithCoordinates(latitude:longtitude:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C57BA409-A5AE-4DF2-9AB9-07E428D4BD1A"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "getForecastWithCoordinates(latitude:longtitude:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F04D891F-C728-4024-9952-306E94D5393A"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "getForecastWithCoordinates(latitude:longtitude:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -741,8 +410,8 @@
             filePath = "WeatherApp_Otus/Controllers/MainVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -757,8 +426,8 @@
             filePath = "WeatherApp_Otus/Controllers/MainVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
             <Locations>
@@ -851,8 +520,8 @@
             filePath = "WeatherApp_Otus/API Manager/GeocodingManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "search(city:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -867,10 +536,10 @@
             filePath = "WeatherApp_Otus/Controllers/SearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "296"
-            endingLineNumber = "296"
-            landmarkName = "SearchVC"
-            landmarkType = "21">
+            startingLineNumber = "278"
+            endingLineNumber = "278"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -883,8 +552,8 @@
             filePath = "WeatherApp_Otus/Controllers/MainVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
             <Locations>
@@ -994,8 +663,8 @@
             filePath = "WeatherApp_Otus/Controllers/MainVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "getForecast()"
             landmarkType = "7">
             <Locations>
@@ -1035,22 +704,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F7507297-9E17-43F0-9D22-29723EC21A17"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "getForecastWithCoordinates(latitude:longtitude:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "10ADD12B-9603-4E15-B32A-607E547926D3"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -1067,22 +720,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9B5F1DDB-24FF-4D41-8072-3893376996AB"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherApp_Otus/Controllers/SearchVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
-            landmarkName = "tableView(_:didSelectRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "5942A275-1D16-4FD5-A81C-0D2E29171468"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -1090,8 +727,8 @@
             filePath = "WeatherApp_Otus/Controllers/ForecastVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "updateViews()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1100,63 +737,16 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "A332AE2D-44BE-45B6-9014-6A2CFBAB5AF2"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WeatherApp_Otus/Controllers/SearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
+            startingLineNumber = "315"
+            endingLineNumber = "315"
             landmarkName = "searchBarSearchButtonClicked(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A332AE2D-44BE-45B6-9014-6A2CFBAB5AF2 - 668c7b0579492948"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 @Swift.MainActor () -&gt; () in closure #1 (WeatherApp_Otus.ForecastModel) -&gt; () in WeatherApp_Otus.SearchVC.searchBarSearchButtonClicked(__C.UISearchBar) -&gt; ()"
-                  moduleName = "WeatherApp_Otus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/Controllers/SearchVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "332"
-                  endingLineNumber = "332"
-                  offsetFromSymbolStart = "232">
-               </Location>
-               <Location
-                  uuid = "A332AE2D-44BE-45B6-9014-6A2CFBAB5AF2 - 7d2d8d85b10588"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (WeatherApp_Otus.ForecastModel) -&gt; () in WeatherApp_Otus.SearchVC.searchBarSearchButtonClicked(__C.UISearchBar) -&gt; ()"
-                  moduleName = "WeatherApp_Otus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/Controllers/SearchVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "332"
-                  endingLineNumber = "332"
-                  offsetFromSymbolStart = "580">
-               </Location>
-               <Location
-                  uuid = "A332AE2D-44BE-45B6-9014-6A2CFBAB5AF2 - 1d0dad240c0ed2b5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (WeatherApp_Otus.ForecastModel) -&gt; () in WeatherApp_Otus.SearchVC.searchBarSearchButtonClicked(__C.UISearchBar) -&gt; ()"
-                  moduleName = "WeatherApp_Otus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/Controllers/SearchVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "333"
-                  endingLineNumber = "333"
-                  offsetFromSymbolStart = "452">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1232,8 +822,8 @@
             filePath = "WeatherApp_Otus/Controllers/SearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1248,8 +838,8 @@
             filePath = "WeatherApp_Otus/API Manager/GeocodingManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "search(city:completion:)"
             landmarkType = "7">
             <Locations>
@@ -1296,8 +886,8 @@
             filePath = "WeatherApp_Otus/Controllers/SearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1312,8 +902,8 @@
             filePath = "WeatherApp_Otus/Controllers/SearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
             <Locations>
@@ -1391,8 +981,8 @@
             filePath = "WeatherApp_Otus/API Manager/CurrentWeatherManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
             landmarkName = "getWeather(latitude:longtitude:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1407,8 +997,8 @@
             filePath = "WeatherApp_Otus/Controllers/SearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "271"
-            endingLineNumber = "271"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1423,8 +1013,8 @@
             filePath = "WeatherApp_Otus/API Manager/GeocodingManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "search(city:completion:)"
             landmarkType = "7">
             <Locations>
@@ -1471,8 +1061,8 @@
             filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "getForecast(latitude:longtitude:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1487,41 +1077,9 @@
             filePath = "WeatherApp_Otus/Controllers/ForecastVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "284576D1-CD84-48FC-8C8A-974DE71950FB"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherApp_Otus/Controllers/ForecastVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "ForecastVC"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A7FE9590-AB13-461A-A57E-9BEC94F4A72A"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeatherApp_Otus/Controllers/ForecastVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "viewDidAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1535,10 +1093,136 @@
             filePath = "WeatherApp_Otus/Controllers/ForecastVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "numberOfSections(in:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A65A1137-4B04-4D34-8B56-5C0A3ED9818E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeatherApp_Otus/API Manager/GeocodingManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "search(city:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A65A1137-4B04-4D34-8B56-5C0A3ED9818E - 196bbdb7801fe4b9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WeatherApp_Otus.GeocodingManager.search(city: Swift.String, completion: (WeatherApp_Otus.ForecastModel) -&gt; ()) -&gt; ()"
+                  moduleName = "WeatherApp_Otus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/API%20Manager/GeocodingManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "544">
+               </Location>
+               <Location
+                  uuid = "A65A1137-4B04-4D34-8B56-5C0A3ED9818E - 196bbdb7801fe49a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WeatherApp_Otus.GeocodingManager.search(city: Swift.String, completion: (WeatherApp_Otus.ForecastModel) -&gt; ()) -&gt; ()"
+                  moduleName = "WeatherApp_Otus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/API%20Manager/GeocodingManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "372">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "36593D04-AA87-45E4-9BE9-6CD76B493178"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeatherApp_Otus/Controllers/SearchVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "36593D04-AA87-45E4-9BE9-6CD76B493178 - 6b12c14bf7127f4e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (WeatherApp_Otus.ForecastModel) -&gt; () in WeatherApp_Otus.SearchVC.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "WeatherApp_Otus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/Controllers/SearchVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "152">
+               </Location>
+               <Location
+                  uuid = "36593D04-AA87-45E4-9BE9-6CD76B493178 - e4f255a09c6ee69b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 @Swift.MainActor () -&gt; () in closure #1 (WeatherApp_Otus.ForecastModel) -&gt; () in WeatherApp_Otus.SearchVC.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "WeatherApp_Otus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/Controllers/SearchVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "152"
+                  endingLineNumber = "152"
+                  offsetFromSymbolStart = "620">
+               </Location>
+               <Location
+                  uuid = "36593D04-AA87-45E4-9BE9-6CD76B493178 - cc39905f3b04abce"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (WeatherApp_Otus.ForecastModel) -&gt; () in WeatherApp_Otus.SearchVC.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "WeatherApp_Otus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/Controllers/SearchVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "636">
+               </Location>
+               <Location
+                  uuid = "36593D04-AA87-45E4-9BE9-6CD76B493178 - 6b12c14bf7127f69"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (WeatherApp_Otus.ForecastModel) -&gt; () in WeatherApp_Otus.SearchVC.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "WeatherApp_Otus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ilya/Desktop/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20Xcode/WeatherApp_Otus/WeatherApp_Otus/Controllers/SearchVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "152"
+                  endingLineNumber = "152"
+                  offsetFromSymbolStart = "152">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

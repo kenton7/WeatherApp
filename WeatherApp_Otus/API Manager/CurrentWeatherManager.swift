@@ -11,10 +11,6 @@ class CurrentWeatherManager {
     
     static let shared = CurrentWeatherManager()
     
-    private var urlString: String {
-        return "https://api.openweathermap.org/data/2.5/weather?lat=\(UserDefaults.standard.double(forKey: "latitude"))&lon=\(UserDefaults.standard.double(forKey: "longtitude"))&units=metric&lang=ru&appid=\(APIKey.APIKey)"
-    }
-    
     func getWeather(latitude: Double, longtitude: Double, completion: @escaping ((ForecastModel)) -> Void) {
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longtitude)&units=metric&lang=ru&appid=\(APIKey.APIKey)") else { return }
         let request = URLRequest(url: url)

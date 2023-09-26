@@ -37,10 +37,9 @@ class GeocodingManager {
                                               humidity: forecastModel.humidity ,
                                               windSpeed: forecastModel.windSpeed ,
                                               selectedItem: nil,
-                                              cityName: forecastModel.cityName,
+                                              cityName: geocoding.first?.localNames?["ru"],
                                               date: forecastModel.date)))
-                    print(forecastModel.date)
-                    print("Погода в \(forecastModel.cityName) сейчас: \(forecastModel.temp) градусов")
+                    print("Погода в \(geocoding.first?.localNames?["ru"]) сейчас: \(forecastModel.temp) градусов")
                 }
             } else {
                 print("failed parsing JSON")

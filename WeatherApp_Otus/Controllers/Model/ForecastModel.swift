@@ -37,7 +37,7 @@ class ForecastRealm: Object {
     @objc dynamic var longitude: Double = 0.0
     @objc dynamic var tempMin: Double = 0.0
     @objc dynamic var tempMax: Double = 0.0
-    @objc dynamic var pressure: Double = 0.0
+    @objc dynamic var pressure: Double = 0.0 // умножать на 0.750064
     @objc dynamic var humidity: Int = 0
     @objc dynamic var windSpeed: Double = 0.0
     @objc dynamic var selectedItem: Int = 0

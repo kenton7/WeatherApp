@@ -31,7 +31,7 @@ class ForecastTableViewCell: UITableViewCell {
     
     var weatherDescription: UILabel = {
         let label = UILabel()
-        label.text = "Облачно с \nпрояснениями"
+        label.text = "--"
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
@@ -44,7 +44,7 @@ class ForecastTableViewCell: UITableViewCell {
     
     var minTemp: UILabel = {
         let label = UILabel()
-        label.text = "21°"
+        label.text = "--"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .white
@@ -53,7 +53,7 @@ class ForecastTableViewCell: UITableViewCell {
     
     var maxTemp: UILabel = {
         let label = UILabel()
-        label.text = "33°"
+        label.text = "--"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .white
@@ -95,7 +95,7 @@ class ForecastTableViewCell: UITableViewCell {
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
             
             dayLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 0),
-            dayLabel.widthAnchor.constraint(equalToConstant: 100),
+            dayLabel.widthAnchor.constraint(equalToConstant: 110),
             
             weatherImage.heightAnchor.constraint(equalToConstant: 40),
             weatherImage.widthAnchor.constraint(equalToConstant: 40),

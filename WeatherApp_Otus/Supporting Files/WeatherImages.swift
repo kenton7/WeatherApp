@@ -56,7 +56,7 @@ class WeatherImages {
             }
         case 802:
             if pod! == "n" {
-                return UIImage(named: "night-cloudy")!
+                return UIImage(named: "night-cloudy2")!
             } else {
                 return UIImage(named: "cloudy")!
             }
@@ -68,7 +68,7 @@ class WeatherImages {
             }
         case 804:
             if pod == "n" {
-                return UIImage(named: "night-cloudy")!
+                return UIImage(named: "night-cloudy2")!
             } else {
                 return UIImage(named: "cloudy")!
             }

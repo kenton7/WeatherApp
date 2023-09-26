@@ -24,6 +24,14 @@ final class ForecastVC: UIViewController {
     var lat = 0.0
     var long = 0.0
     
+    private lazy var spinner: CustomLoaderView = {
+        let spinner = CustomLoaderView(squareLength: 100)
+        spinner.isHidden = true
+        return spinner
+    }()
+    
+    var coordinates: Coordinates?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,6 +43,7 @@ final class ForecastVC: UIViewController {
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
         forecastViews.configure(on: view)
+        view.addSubview(spinner)
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
@@ -45,43 +54,23 @@ final class ForecastVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
         view.alpha = 1.0
+        ForecastManager.shared.getForecast(latitude: coordinates?.latitude ?? 0.0, longtitude: coordinates?.longitude ?? 0.0) { forecast in
+            DispatchQueue.main.async {
+                self.spinner.isHidden = false
+            }
+            self.weather = forecast
+        }
         updateViews()
-        
-//        ForecastManager.shared.getForecastWithCoordinates(latitude: <#T##Double#>, longtitude: <#T##Double#>) { [weak self] forecast in
-//            guard let self = self else { return }
-//            
-//            forecast.
-//        }
     }
     
     private var weather = [ForecastModel]() {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.spinner.isHidden = true
             }
         }
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        ForecastManager.shared.getForecast(latitude: lat, longtitude: long) { forecast in
-            self.weather = forecast
-            //print(forecast.)
-        }
-    }
-    
-//    private func getForecast() {
-//        for i in forecastModel {
-//            guard let lat = i.latitude, let long = i.longitude else { return }
-//            ForecastManager.shared.getForecast(latitude: lat, longtitude: long) { [weak self] forecast in
-//                guard let self else { return }
-//                self.forecastModel = forecast
-//            }
-//        }
-//        
-//        print("forecastModel \(forecastModel)")
-//    }
     
     private func updateViews() {
         for _ in forecastModel {
@@ -92,12 +81,6 @@ final class ForecastVC: UIViewController {
                 self.forecastViews.humidityLabel.text = "\(self.forecastModel.last?.humidity ?? 0)%"
                 self.forecastViews.pressureLabel.text = "\(Int((self.forecastModel.last?.pressure?.rounded() ?? 0) * 0.750064)) мм.рт.ст."
                 self.forecastViews.windLabel.text = "\(Int(self.forecastModel.last?.windSpeed?.rounded() ?? 0)) м/с"
-                //self.forecastViews.maxTemperatureLabel.text = "\(Int(self.forecastModel[data.selectedItem ?? 0].tempMax?.rounded() ?? 0.0))°"
-//                self.forecastViews.minTemperaureLabel.text = " / \(Int(self.forecastModel[data.selectedItem ?? 0].tempMin?.rounded() ?? 0.0))°"
-//                self.forecastViews.weatherImage.image = WeatherImages.shared.weatherImages(id: self.forecastModel[data.selectedItem ?? 0].id ?? 803, pod: self.forecastModel[data.selectedItem ?? 0].dayOrNight)
-//                self.forecastViews.humidityLabel.text = "\(self.forecastModel[data.selectedItem ?? 0].humidity ?? 0)%"
-//                self.forecastViews.pressureLabel.text = "\(Int((self.forecastModel[data.selectedItem ?? 0].pressure?.rounded() ?? 0) * 0.750064)) мм.рт.ст."
-//                self.forecastViews.windLabel.text = "\(Int(self.forecastModel[data.selectedItem ?? 0].windSpeed?.rounded() ?? 0)) м/с"
             }
         }
     }
@@ -137,8 +120,10 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
         //cell.weatherDescription.text = weather[indexPath.section].description?.prefix(1).uppercased() + (weather[indexPath.section].description?.lowercased().dropFirst())!
         let separatedDescription = weather[indexPath.section].weatherDescription?.components(separatedBy: " ")
         let finalDescription = "\(separatedDescription?[0].capitalized ?? "")\n\(separatedDescription?.last ?? "")"
-        if separatedDescription!.count >= 2 {
+        if separatedDescription!.count == 2 {
             cell.weatherDescription.text = finalDescription
+        } else if separatedDescription!.count == 3 {
+            cell.weatherDescription.text = "\(separatedDescription?[0].capitalized ?? "") \(separatedDescription?[1] ?? "с")\n\(separatedDescription?.last ?? "")"
         } else {
             cell.weatherDescription.text = weather[indexPath.section].weatherDescription!.prefix(1).uppercased() + (weather[indexPath.section].weatherDescription?.lowercased().dropFirst())!
         }

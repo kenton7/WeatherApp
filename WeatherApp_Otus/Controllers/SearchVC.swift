@@ -22,8 +22,6 @@ final class SearchVC: UIViewController {
         return tableView
     }()
     private var locationManager = CLLocationManager()
-    private var long = 0.0
-    private var lat = 0.0
     
     private lazy var spinner: CustomLoaderView = {
         let spinner = CustomLoaderView(squareLength: 100)
@@ -42,6 +40,7 @@ final class SearchVC: UIViewController {
     
     let realm = try! Realm()
     var forecastRealm: Results<ForecastRealm>?
+    private var coordinates: Coordinates?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +74,7 @@ final class SearchVC: UIViewController {
         super.viewWillAppear(animated)
         view.alpha = 1.0
         navigationController?.setNavigationBarHidden(true, animated: true)
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -97,20 +97,21 @@ final class SearchVC: UIViewController {
             self.spinner.startAnimation(delay: 0.06, replicates: 20)
         }
         
-        CurrentWeatherManager.shared.getWeather(latitude: lat, longtitude: long) { [weak self] forecastModel in
+        CurrentWeatherManager.shared.getWeather(latitude: coordinates?.latitude ?? 0.0, longtitude: coordinates?.longitude ?? 0.0) { [weak self] forecastModel in
             guard let self else { return }
+            
             DispatchQueue.main.async {
                 try! self.realm.write {
-                    self.realm.add(ForecastRealm(cityName: forecastModel.cityName ?? "",
-                                                 dayOrNight: forecastModel.dayOrNight ?? "d",
-                                                 weatherDescription: forecastModel.weatherDescription ?? "",
+                    self.realm.add(ForecastRealm(cityName: forecastModel.cityName ?? "" ,
+                                                 dayOrNight: forecastModel.dayOrNight ?? "d" ,
+                                                 weatherDescription: forecastModel.weatherDescription ?? "" ,
                                                  id: forecastModel.id ?? 803,
                                                  temp: forecastModel.temp ?? 0.0,
                                                  latitude: forecastModel.latitude ?? 0.0,
                                                  longitude: forecastModel.longitude ?? 0.0,
                                                  tempMin: forecastModel.tempMin ?? 0.0,
                                                  tempMax: forecastModel.tempMax ?? 0.0,
-                                                 pressure: forecastModel.pressure ?? 0.0,
+                                                 pressure: forecastModel.pressure ?? 0,
                                                  humidity: forecastModel.humidity ?? 0,
                                                  windSpeed: forecastModel.windSpeed ?? 0.0,
                                                  selectedItem: forecastModel.selectedItem ?? 0,
@@ -147,6 +148,7 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
         
         GeocodingManager.shared.search(city: forecastRealm?[indexPath.section].cityName ?? "") { [weak self] forecast in
             guard let self = self else { return }
+            //Обновляем данные в ячейках (в бд Realm) новыми данными из API
             DispatchQueue.main.async {
                 try! self.realm.write {
                     self.forecastRealm?[indexPath.section].temp = forecast.temp?.rounded() ?? 0.0
@@ -249,9 +251,10 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
         let forecastVC = ForecastVC()
         
         if let transferData = forecastRealm?[indexPath.section] {
-            print(transferData)
-            forecastVC.lat = transferData.latitude
-            forecastVC.long = transferData.longitude
+            forecastVC.coordinates = Coordinates(latitude: transferData.latitude, longitude: transferData.longitude)
+            //forecastVC.coordinates?.longitude = transferData.longitude
+//            forecastVC.lat = transferData.latitude
+//            forecastVC.long = transferData.longitude
             
             forecastVC.forecastModel.append(ForecastModel(
                 latitude: transferData.latitude,
@@ -269,27 +272,6 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
                 cityName: transferData.cityName,
                 date: transferData.date))
         }
-        
-//        for i in forecastRealm! {
-//            forecastVC.forecastModel.append(ForecastModel(
-//                latitude: i.latitude,
-//                longitude: i.longitude,
-//                description: i.weatherDescription,
-//                id: i.id,
-//                dayOrNight: i.dayOrNight,
-//                temp: i.temp,
-//                tempMin: i.tempMin,
-//                tempMax: i.tempMax,
-//                pressure: i.pressure,
-//                humidity: i.humidity,
-//                windSpeed: i.windSpeed,
-//                selectedItem: indexPath.section,
-//                cityName: i.cityName))
-//        }
-        
-        //        for i in weatherData {
-        //            forecastVC.forecastModel.append(ForecastModel(latitude: i.latitude, longitude: i.longitude, description: i.description, id: i.id, dayOrNight: i.dayOrNight, temp: i.temp, tempMin: i.tempMin, tempMax: i.tempMax, pressure: i.pressure, humidity: i.humidity, windSpeed: i.windSpeed, selectedItem: indexPath.section, cityName: i.cityName))
-        //        }
         navigationController?.pushViewController(forecastVC, animated: true)
     }
     
@@ -310,8 +292,9 @@ extension SearchVC: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        long = locValue.longitude
-        lat = locValue.latitude
+        coordinates = Coordinates(latitude: locValue.latitude, longitude: locValue.longitude)
+//        long = locValue.longitude
+//        lat = locValue.latitude
         manager.stopUpdatingLocation()
     }
 }
@@ -328,7 +311,7 @@ extension SearchVC: UISearchBarDelegate {
         
         GeocodingManager.shared.search(city: searchingCity) { [weak self] forecastModel in
             guard let self = self else { return }
-            print(forecastModel)
+            
             DispatchQueue.main.async {
                 try! self.realm.write {
                     self.realm.add(ForecastRealm(cityName: forecastModel.cityName ?? "",

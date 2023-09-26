@@ -40,6 +40,8 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         }
     }
     
+    private var coordinates: Coordinates?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -104,7 +106,7 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
     }
     
     private func getForecast() {
-        ForecastManager.shared.getForecastWithCoordinates(latitude: lat, longtitude: long, completion: { [weak self] forecast in
+        ForecastManager.shared.getForecastWithCoordinates(latitude: coordinates?.latitude ?? 0.0, longtitude: coordinates?.longitude ?? 0.0, completion: { [weak self] forecast in
             guard let self else { return }
             self.weatherModel = forecast
         })
@@ -113,17 +115,15 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
     private func getCurrentWeather() {
         let calendar = Calendar.current
         
-        CurrentWeatherManager.shared.getWeather(latitude: lat, longtitude: long) { [weak self] weatherModel in
+        CurrentWeatherManager.shared.getWeather(latitude: coordinates?.latitude ?? 0.0, longtitude: coordinates?.longitude ?? 0.0) { [weak self] weatherModel in
             
-            print(weatherModel)
-
             DispatchQueue.main.async {
                 self?.weatherUIElements.weatherImage.image = WeatherImages.shared.weatherImages(id: weatherModel.id ?? 803 , pod: calendar.component(.hour, from: Date()) >= 20 ? "n" : "d")
-                self?.weatherUIElements.temperatureLabel.text = "\(Int(weatherModel.temp?.rounded() ?? 0))°"
-                self?.weatherUIElements.pressureLabel.text = "\(Int((weatherModel.pressure ?? 0) * 0.750064)) мм рт.ст."
+                self?.weatherUIElements.temperatureLabel.text = "\(Int(weatherModel.temp?.rounded() ?? 0.0))°"
+                self?.weatherUIElements.pressureLabel.text = "\(Int((weatherModel.pressure ?? 0.0) * 0.750064)) мм рт.ст."
                 self?.weatherUIElements.humidityLabel.text = "\(Int(weatherModel.humidity ?? 0))%"
-                self?.weatherUIElements.windLabel.text = "\(Int(weatherModel.windSpeed?.rounded() ?? 0)) м/с"
-                self?.weatherUIElements.weatherDescription.text = weatherModel.weatherDescription!.prefix(1).uppercased() + (weatherModel.weatherDescription?.lowercased().dropFirst())!
+                self?.weatherUIElements.windLabel.text = "\(Int(weatherModel.windSpeed?.rounded() ?? 0.0)) м/с"
+                self?.weatherUIElements.weatherDescription.text = weatherModel.weatherDescription!.prefix(1).uppercased() + ((weatherModel.weatherDescription!.lowercased().dropFirst()))
                 self?.weatherUIElements.cityLabel.text = weatherModel.cityName
                 self?.spinner.isHidden = true
                 self?.spinner.stopAnimation()
@@ -135,7 +135,6 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
     //MARK: -- CollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCollectionViewCell.cellID, for: indexPath) as! WeatherCollectionViewCell
-        let calendar = Calendar.current
         if indexPath.row == 0 {
             cell.timeLabel.text = "Сейчас"
             //cell.timeLabel.text = "\(calendar.component(.hour, from: Date())):00"
@@ -179,8 +178,9 @@ extension MainVC: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        long = locValue.longitude
-        lat = locValue.latitude
+        coordinates = Coordinates(latitude: locValue.latitude, longitude: locValue.longitude)
+//        long = locValue.longitude
+//        lat = locValue.latitude
         manager.stopUpdatingLocation()
     }
 }
