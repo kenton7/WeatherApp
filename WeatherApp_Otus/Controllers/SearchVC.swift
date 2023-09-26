@@ -24,7 +24,7 @@ final class SearchVC: UIViewController {
     private var locationManager = CLLocationManager()
     private var long = 0.0
     private var lat = 0.0
-
+    
     private lazy var spinner: CustomLoaderView = {
         let spinner = CustomLoaderView(squareLength: 100)
         spinner.isHidden = true
@@ -45,7 +45,7 @@ final class SearchVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         tap.cancelsTouchesInView = false // позволяет делать тап по ячейке. Настройка нужна, потому что есть жест
@@ -96,13 +96,14 @@ final class SearchVC: UIViewController {
             self.spinner.isHidden = false
             self.spinner.startAnimation(delay: 0.06, replicates: 20)
         }
-
-        CurrentWeatherManager.shared.getWeather(latitude: lat, longtitude: long) { forecastModel in
+        
+        CurrentWeatherManager.shared.getWeather(latitude: lat, longtitude: long) { [weak self] forecastModel in
+            guard let self else { return }
             DispatchQueue.main.async {
                 try! self.realm.write {
-                    self.realm.add(ForecastRealm(cityName: forecastModel.cityName ?? "", 
+                    self.realm.add(ForecastRealm(cityName: forecastModel.cityName ?? "",
                                                  dayOrNight: forecastModel.dayOrNight ?? "d",
-                                                 weatherDescription: forecastModel.description ?? "",
+                                                 weatherDescription: forecastModel.weatherDescription ?? "",
                                                  id: forecastModel.id ?? 803,
                                                  temp: forecastModel.temp ?? 0.0,
                                                  latitude: forecastModel.latitude ?? 0.0,
@@ -112,7 +113,8 @@ final class SearchVC: UIViewController {
                                                  pressure: forecastModel.pressure ?? 0.0,
                                                  humidity: forecastModel.humidity ?? 0,
                                                  windSpeed: forecastModel.windSpeed ?? 0.0,
-                                                 selectedItem: forecastModel.selectedItem ?? 0))
+                                                 selectedItem: forecastModel.selectedItem ?? 0,
+                                                 date: forecastModel.date ?? ""))
                     //self.realm.add(ForecastRealm(cityName: forecastModel.cityName ?? "", dayOrNight: forecastModel.dayOrNight ?? "d", descrption: forecastModel.description ?? "", id: forecastModel.id ?? 803, temp: forecastModel.temp ?? 0.0))
                     self.tableView.reloadData()
                     self.spinner.isHidden = true
@@ -126,7 +128,7 @@ final class SearchVC: UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-
+    
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -143,11 +145,12 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.cellID, for: indexPath) as! SearchTableViewCell
         
-        GeocodingManager.shared.search(city: forecastRealm?[indexPath.section].cityName ?? "") { forecast in
+        GeocodingManager.shared.search(city: forecastRealm?[indexPath.section].cityName ?? "") { [weak self] forecast in
+            guard let self = self else { return }
             DispatchQueue.main.async {
                 try! self.realm.write {
                     self.forecastRealm?[indexPath.section].temp = forecast.temp?.rounded() ?? 0.0
-                    self.forecastRealm?[indexPath.section].weatherDescription = forecast.description ?? ""
+                    self.forecastRealm?[indexPath.section].weatherDescription = forecast.weatherDescription ?? ""
                     self.forecastRealm?[indexPath.section].id = forecast.id ?? 803
                     self.forecastRealm?[indexPath.section].dayOrNight = forecast.dayOrNight ?? "d"
                     self.forecastRealm?[indexPath.section].humidity = forecast.humidity ?? 0
@@ -158,20 +161,21 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
                     self.forecastRealm?[indexPath.section].temp = forecast.temp ?? 0.0
                     self.forecastRealm?[indexPath.section].tempMax = forecast.tempMax ?? 0.0
                     self.forecastRealm?[indexPath.section].tempMin = forecast.tempMin ?? 0.0
-                    self.forecastRealm?[indexPath.section].weatherDescription = forecast.description ?? ""
+                    self.forecastRealm?[indexPath.section].weatherDescription = forecast.weatherDescription ?? ""
                     self.forecastRealm?[indexPath.section].windSpeed = forecast.windSpeed ?? 0.0
+                    self.forecastRealm?[indexPath.section].date = forecast.date ?? ""
                 }
             }
         }
-                        cell.cityLabel.text = self.forecastRealm?[indexPath.section].cityName
+        cell.cityLabel.text = self.forecastRealm?[indexPath.section].cityName
         cell.weatherDescriptionLabel.text = (self.forecastRealm?[indexPath.section].weatherDescription.prefix(1).uppercased())! + "\(self.forecastRealm![indexPath.section].weatherDescription.lowercased().dropFirst())"
-//                        cell.weatherDescriptionLabel.text = self.forecastRealm![indexPath.section].description.prefix(1).uppercased() + self.forecastRealm![indexPath.section].description.lowercased().dropFirst()
-                        cell.weatherImage.image = WeatherImages.shared.weatherImages(id: self.forecastRealm?[indexPath.section].id ?? 803, pod: self.forecastRealm?[indexPath.section].dayOrNight)
-                        cell.temperatureLabel.text = "\(Int(self.forecastRealm?[indexPath.section].temp.rounded() ?? 0))°"
+        //                        cell.weatherDescriptionLabel.text = self.forecastRealm![indexPath.section].description.prefix(1).uppercased() + self.forecastRealm![indexPath.section].description.lowercased().dropFirst()
+        cell.weatherImage.image = WeatherImages.shared.weatherImages(id: self.forecastRealm?[indexPath.section].id ?? 803, pod: self.forecastRealm?[indexPath.section].dayOrNight)
+        cell.temperatureLabel.text = "\(Int(self.forecastRealm?[indexPath.section].temp.rounded() ?? 0))°"
         //cell.cityLabel.text = weatherData[indexPath.section].cityName
-//        cell.weatherDescriptionLabel.text = weatherData[indexPath.section].description!.prefix(1).uppercased() + weatherData[indexPath.section].description!.lowercased().dropFirst()
-//        cell.weatherImage.image = WeatherImages.shared.weatherImages(id: Int(weatherData[indexPath.section].id ?? 803), pod: weatherData[indexPath.section].dayOrNight)
-//        cell.temperatureLabel.text = "\(Int(weatherData[indexPath.section].temp?.rounded() ?? 0))°"
+        //        cell.weatherDescriptionLabel.text = weatherData[indexPath.section].description!.prefix(1).uppercased() + weatherData[indexPath.section].description!.lowercased().dropFirst()
+        //        cell.weatherImage.image = WeatherImages.shared.weatherImages(id: Int(weatherData[indexPath.section].id ?? 803), pod: weatherData[indexPath.section].dayOrNight)
+        //        cell.temperatureLabel.text = "\(Int(weatherData[indexPath.section].temp?.rounded() ?? 0))°"
         return cell
     }
     
@@ -208,7 +212,7 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
     
     //Удаление элемента
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
+        
         let delete = UIContextualAction(style: .normal, title: nil) { [weak self] (contextualAction, _, completion) in
             DispatchQueue.main.async {
                 guard let self = self else { return }
@@ -221,7 +225,7 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
             //self?.weatherData.remove(at: indexPath.section)
             completion(true)
         }
-
+        
         //кастомный вид удаления
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 17.0, weight: .bold, scale: .large)
         delete.image = UIImage(systemName: "trash", withConfiguration: largeConfig)?.withTintColor(.white, renderingMode: .alwaysTemplate).addBackgroundCircle(.systemRed)
@@ -229,7 +233,7 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
         delete.title = "Удалить"
         let config = UISwipeActionsConfiguration(actions: [delete])
         config.performsFirstActionWithFullSwipe = false
-
+        
         return config
     }
     
@@ -244,29 +248,51 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         let forecastVC = ForecastVC()
         
-        for i in forecastRealm! {
+        if let transferData = forecastRealm?[indexPath.section] {
+            print(transferData)
+            forecastVC.lat = transferData.latitude
+            forecastVC.long = transferData.longitude
+            
             forecastVC.forecastModel.append(ForecastModel(
-                latitude: i.latitude,
-                longitude: i.longitude,
-                description: i.weatherDescription, 
-                id: i.id,
-                dayOrNight: i.dayOrNight,
-                temp: i.temp,
-                tempMin: i.tempMin,
-                tempMax: i.tempMax,
-                pressure: i.pressure,
-                humidity: i.humidity,
-                windSpeed: i.windSpeed,
+                latitude: transferData.latitude,
+                longitude: transferData.longitude,
+                weatherDescription: transferData.weatherDescription,
+                id: transferData.id,
+                dayOrNight: transferData.dayOrNight,
+                temp: transferData.temp,
+                tempMin: transferData.tempMin,
+                tempMax: transferData.tempMax,
+                pressure: transferData.pressure,
+                humidity: transferData.humidity,
+                windSpeed: transferData.windSpeed,
                 selectedItem: indexPath.section,
-                cityName: i.cityName))
+                cityName: transferData.cityName,
+                date: transferData.date))
         }
         
-//        for i in weatherData {
-//            forecastVC.forecastModel.append(ForecastModel(latitude: i.latitude, longitude: i.longitude, description: i.description, id: i.id, dayOrNight: i.dayOrNight, temp: i.temp, tempMin: i.tempMin, tempMax: i.tempMax, pressure: i.pressure, humidity: i.humidity, windSpeed: i.windSpeed, selectedItem: indexPath.section, cityName: i.cityName))
+//        for i in forecastRealm! {
+//            forecastVC.forecastModel.append(ForecastModel(
+//                latitude: i.latitude,
+//                longitude: i.longitude,
+//                description: i.weatherDescription,
+//                id: i.id,
+//                dayOrNight: i.dayOrNight,
+//                temp: i.temp,
+//                tempMin: i.tempMin,
+//                tempMax: i.tempMax,
+//                pressure: i.pressure,
+//                humidity: i.humidity,
+//                windSpeed: i.windSpeed,
+//                selectedItem: indexPath.section,
+//                cityName: i.cityName))
 //        }
+        
+        //        for i in weatherData {
+        //            forecastVC.forecastModel.append(ForecastModel(latitude: i.latitude, longitude: i.longitude, description: i.description, id: i.id, dayOrNight: i.dayOrNight, temp: i.temp, tempMin: i.tempMin, tempMax: i.tempMax, pressure: i.pressure, humidity: i.humidity, windSpeed: i.windSpeed, selectedItem: indexPath.section, cityName: i.cityName))
+        //        }
         navigationController?.pushViewController(forecastVC, animated: true)
     }
-
+    
 }
 
 //MARK: - CLLocationManagerDelegate
@@ -295,29 +321,32 @@ extension SearchVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("searchText \(searchText)")
     }
-
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchingCity = searchBar.text else { return }
         searchBar.searchTextField.autocorrectionType = .yes
         
         GeocodingManager.shared.search(city: searchingCity) { [weak self] forecastModel in
+            guard let self = self else { return }
+            print(forecastModel)
             DispatchQueue.main.async {
-                try! self?.realm.write {
-                    self?.realm.add(ForecastRealm(cityName: forecastModel.cityName ?? "", 
-                                                  dayOrNight: forecastModel.dayOrNight ?? "d",
-                                                  weatherDescription: forecastModel.description ?? "",
-                                                  id: forecastModel.id ?? 803,
-                                                  temp: forecastModel.temp ?? 0.0,
-                                                  latitude: forecastModel.latitude ?? 0.0,
-                                                  longitude: forecastModel.longitude ?? 0.0,
-                                                  tempMin: forecastModel.tempMin ?? 0.0,
-                                                  tempMax: forecastModel.tempMax ?? 0.0,
-                                                  pressure: forecastModel.pressure ?? 0.0,
-                                                  humidity: forecastModel.humidity ?? 0,
-                                                  windSpeed: forecastModel.windSpeed ?? 0.0,
-                                                  selectedItem: forecastModel.selectedItem ?? 0))
-                    self?.tableView.reloadData()
-                    self?.spinner.isHidden = true
+                try! self.realm.write {
+                    self.realm.add(ForecastRealm(cityName: forecastModel.cityName ?? "",
+                                                 dayOrNight: forecastModel.dayOrNight ?? "d",
+                                                 weatherDescription: forecastModel.weatherDescription ?? "",
+                                                 id: forecastModel.id ?? 803,
+                                                 temp: forecastModel.temp ?? 0.0,
+                                                 latitude: forecastModel.latitude ?? 0.0,
+                                                 longitude: forecastModel.longitude ?? 0.0,
+                                                 tempMin: forecastModel.tempMin ?? 0.0,
+                                                 tempMax: forecastModel.tempMax ?? 0.0,
+                                                 pressure: forecastModel.pressure ?? 0.0,
+                                                 humidity: forecastModel.humidity ?? 0,
+                                                 windSpeed: forecastModel.windSpeed ?? 0.0,
+                                                 selectedItem: forecastModel.selectedItem ?? 0,
+                                                 date: forecastModel.date ?? ""))
+                    self.tableView.reloadData()
+                    self.spinner.isHidden = true
                 }
             }
             //self?.weatherData.append(forecastModel)

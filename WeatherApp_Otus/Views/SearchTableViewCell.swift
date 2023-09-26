@@ -87,7 +87,7 @@ class SearchTableViewCell: UITableViewCell {
 
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: 50),
+            stackView.heightAnchor.constraint(equalToConstant: 60),
             
             cityLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 0),
             

@@ -114,6 +114,8 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         let calendar = Calendar.current
         
         CurrentWeatherManager.shared.getWeather(latitude: lat, longtitude: long) { [weak self] weatherModel in
+            
+            print(weatherModel)
 
             DispatchQueue.main.async {
                 self?.weatherUIElements.weatherImage.image = WeatherImages.shared.weatherImages(id: weatherModel.id ?? 803 , pod: calendar.component(.hour, from: Date()) >= 20 ? "n" : "d")
@@ -121,7 +123,7 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
                 self?.weatherUIElements.pressureLabel.text = "\(Int((weatherModel.pressure ?? 0) * 0.750064)) мм рт.ст."
                 self?.weatherUIElements.humidityLabel.text = "\(Int(weatherModel.humidity ?? 0))%"
                 self?.weatherUIElements.windLabel.text = "\(Int(weatherModel.windSpeed?.rounded() ?? 0)) м/с"
-                self?.weatherUIElements.weatherDescription.text = weatherModel.description!.prefix(1).uppercased() + (weatherModel.description?.lowercased().dropFirst())!
+                self?.weatherUIElements.weatherDescription.text = weatherModel.weatherDescription!.prefix(1).uppercased() + (weatherModel.weatherDescription?.lowercased().dropFirst())!
                 self?.weatherUIElements.cityLabel.text = weatherModel.cityName
                 self?.spinner.isHidden = true
                 self?.spinner.stopAnimation()
@@ -135,7 +137,8 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCollectionViewCell.cellID, for: indexPath) as! WeatherCollectionViewCell
         let calendar = Calendar.current
         if indexPath.row == 0 {
-            cell.timeLabel.text = "\(calendar.component(.hour, from: Date())):00"
+            cell.timeLabel.text = "Сейчас"
+            //cell.timeLabel.text = "\(calendar.component(.hour, from: Date())):00"
             cell.temperatureLabel.text = weatherUIElements.temperatureLabel.text
             cell.weatherIcon.image = weatherUIElements.weatherImage.image
         } else {

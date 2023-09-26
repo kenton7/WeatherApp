@@ -13,7 +13,7 @@ let realm = try! Realm()
 struct ForecastModel {
     var latitude: Double?
     var longitude: Double?
-    var description: String?
+    var weatherDescription: String?
     var id: Int?
     var dayOrNight: String?
     var temp: Double?
@@ -41,6 +41,7 @@ class ForecastRealm: Object {
     @objc dynamic var humidity: Int = 0
     @objc dynamic var windSpeed: Double = 0.0
     @objc dynamic var selectedItem: Int = 0
+    @objc dynamic var date: String = ""
     
     
 //    override class func primaryKey() -> String? {
@@ -48,7 +49,7 @@ class ForecastRealm: Object {
 //        }
     
     
-    convenience init(cityName: String, dayOrNight: String, weatherDescription: String, id: Int, temp: Double, latitude: Double, longitude: Double, tempMin: Double, tempMax: Double, pressure: Double, humidity: Int, windSpeed: Double, selectedItem: Int) {
+    convenience init(cityName: String, dayOrNight: String, weatherDescription: String, id: Int, temp: Double, latitude: Double, longitude: Double, tempMin: Double, tempMax: Double, pressure: Double, humidity: Int, windSpeed: Double, selectedItem: Int, date: String) {
         self.init()
         self.cityName = cityName
         self.dayOrNight = dayOrNight
@@ -63,6 +64,7 @@ class ForecastRealm: Object {
         self.humidity = humidity
         self.windSpeed = windSpeed
         self.selectedItem = selectedItem
+        self.date = date
     }
 }
 
