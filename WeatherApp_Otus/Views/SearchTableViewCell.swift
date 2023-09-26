@@ -57,7 +57,7 @@ class SearchTableViewCell: UITableViewCell {
        let view = UIStackView()
         view.axis = .vertical
         view.alignment = .leading
-        view.spacing = 15
+        view.spacing = 25
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -82,7 +82,7 @@ class SearchTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             weatherImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             weatherImage.heightAnchor.constraint(equalToConstant: 90),
-            weatherImage.widthAnchor.constraint(equalToConstant: 130),
+            weatherImage.widthAnchor.constraint(equalToConstant: 110),
             weatherImage.centerYAnchor.constraint(equalTo: centerYAnchor),
 
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),

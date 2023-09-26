@@ -302,14 +302,14 @@ class MainWeatherViews {
         //weatherDataStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         //weatherDataStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         weatherDataStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        weatherDescription.topAnchor.constraint(equalTo: cityLabel.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        weatherDescription.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 5).isActive = true
         
-        weatherImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        //weatherImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
         weatherImage.widthAnchor.constraint(equalToConstant: 150).isActive = true
         temperatureLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
         //temperatureLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        //dateLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        dateLabel.bottomAnchor.constraint(equalTo: detailStackView.topAnchor, constant: -10).isActive = true
+        dateLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        //dateLabel.bottomAnchor.constraint(equalTo: detailStackView.topAnchor, constant: -10).isActive = true
         
         //visibilityStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
         //visibilityStackView.topAnchor.constraint(equalTo: weatherDataStackView.bottomAnchor, constant: 20).isActive = true
