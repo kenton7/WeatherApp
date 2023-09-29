@@ -22,29 +22,6 @@ final class SettingsVC: UIViewController {
     
     private let settingsVC = SettingsViews()
     private var selectedIndexPath: Int?
-//    private let dictionaryMeasures = [MeasureType.celcius.rawValue: ["Градусы Цельсия °C"],
-//                                      MeasureType.farengeight.rawValue: ["Градусы Фаренгейта °F"],
-//                                       MeasureType.meterPerSecond.rawValue: ["м/с"],
-//                                        MeasureType.kilometerPerHour.rawValue: ["км/ч"],
-//                                         MeasureType.milesPerHout.rawValue: ["ми/ч"],
-//                                          MeasureType.mmRtSt.rawValue: ["мм.рт.ст."],
-//                                           MeasureType.hektopascal.rawValue: ["гПа"],
-//                                            MeasureType.kilopascal.rawValue: ["кПа"],
-//                                             MeasureType.milibars.rawValue: ["мбар"],
-//                                              MeasureType.inchesRtSt.rawValue: ["д.рт.ст."]]
-    
-    /*
-     case celcius = "Градусы Цельсия (°C)"
-     case farengeight = "Градусы Фаренгейта (°F)"
-     case meterPerSecond = "м/с"
-     case kilometerPerHour = "км/ч"
-     case milesPerHout = "ми/ч"
-     case mmRtSt = "мм.рт.ст."
-     case hektopascal = "гПа"
-     case kilopascal = "кПа"
-     case milibars = "мбар"
-     case inchesRtSt = "д.рт.ст"
-     */
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,7 +78,6 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.cellID, for: indexPath) as! SettingsTableViewCell
 
-        
         if indexPath.section == 0 {
             if indexPath.row == UserDefaults.standard.integer(forKey: "selectedItem") {
                 cell.accessoryType = .checkmark
@@ -113,9 +89,6 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             cell.temperatureLabel.text = MeasureType.allCases[indexPath.row + 2].rawValue
             cell.accessoryType = .none
         }
-        
-
-        //tableView.cellForRow(at: UserDefaults.standard.integer(forKey: "selectedItem"))?.accessoryType = .checkmark
         return cell
     }
     
@@ -134,12 +107,4 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             tableView.reloadData()
         }
     }
-    
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        if indexPath.section == 0 {
-//            tableView.deselectRow(at: indexPath, animated: true)
-//
-//        }
-//    }
-    
 }
