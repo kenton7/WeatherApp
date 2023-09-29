@@ -18,7 +18,6 @@ final class TabBarController: UITabBarController {
         self.delegate = self
         
         self.setValue(tabBarView, forKey: "tabBar")
-        //generateTabBar()
         setupVCs()
         self.selectedIndex = 0
     }
@@ -28,14 +27,6 @@ final class TabBarController: UITabBarController {
         super.viewDidLayoutSubviews()
         
     }
-    
-//    func generateTabBar() {
-//        viewControllers = [
-//            generateVC(viewController: MainVC(), image: UIImage(systemName: "house.fill")!, title: nil),
-//            generateVC(viewController: SearchVC(), image: UIImage(systemName: "magnifyingglass")!, title: nil),
-//            generateVC(viewController: SettingsVC(), image: UIImage(systemName: "gear")!, title: nil)
-//        ]
-//    }
     
     func setupVCs() {
         viewControllers = [

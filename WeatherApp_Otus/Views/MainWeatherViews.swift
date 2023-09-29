@@ -63,6 +63,9 @@ class MainWeatherViews {
         button.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
         button.setImage(UIImage(named: "refresh"), for: .normal)
         button.tintColor = .black
+        button.layer.shadowOffset = CGSize(width: 0, height: 0)
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 1
         return button
     }()
     
@@ -181,6 +184,9 @@ class MainWeatherViews {
         view.backgroundColor = UIColor(red: 0.32, green: 0.25, blue: 0.5, alpha: 1)
         view.layer.cornerRadius = 8
         view.alpha = 0.8
+        view.layer.shadowOffset = CGSize(width: 0, height: 0)
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 1
         return view
     }()
     
@@ -234,6 +240,9 @@ class MainWeatherViews {
         label.textAlignment = .center
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.layer.shadowOffset = CGSize(width: 0, height: 0)
+        label.layer.shadowColor = UIColor.black.cgColor
+        label.layer.shadowOpacity = 1
         return label
     }()
     
@@ -244,6 +253,9 @@ class MainWeatherViews {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
         label.textAlignment = .center
+        label.layer.shadowOffset = CGSize(width: 0, height: 0)
+        label.layer.shadowColor = UIColor.black.cgColor
+        label.layer.shadowOpacity = 1
         return label
     }()
     

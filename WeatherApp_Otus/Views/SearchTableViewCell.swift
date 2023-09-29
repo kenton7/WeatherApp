@@ -73,6 +73,7 @@ class SearchTableViewCell: UITableViewCell {
         isUserInteractionEnabled = true
         selectionStyle = .none
         
+        
         addSubview(stackView)
         addSubview(weatherImage)
         stackView.addArrangedSubview(cityLabel)

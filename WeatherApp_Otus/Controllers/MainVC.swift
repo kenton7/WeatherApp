@@ -109,7 +109,6 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
                 self?.weatherUIElements.weatherImage.image = WeatherImages.shared.weatherImages(id: weatherModel.id ?? 803 , pod: calendar.component(.hour, from: Date()) >= 20 ? "n" : "d")
                 self?.weatherUIElements.temperatureLabel.text = "\(Int(weatherModel.temp?.rounded() ?? 0.0))°"
                 self?.weatherUIElements.pressureLabel.text = "\(Int((weatherModel.pressure ?? 0.0))) мм рт.ст."
-                print(Int(weatherModel.pressure ?? 0.0))
                 self?.weatherUIElements.humidityLabel.text = "\(Int(weatherModel.humidity ?? 0))%"
                 self?.weatherUIElements.windLabel.text = "\(Int(weatherModel.windSpeed?.rounded() ?? 0.0)) м/с"
                 self?.weatherUIElements.weatherDescription.text = (weatherModel.weatherDescription?.prefix(1).uppercased() ?? "") + ((weatherModel.weatherDescription?.lowercased().dropFirst() ?? ""))
