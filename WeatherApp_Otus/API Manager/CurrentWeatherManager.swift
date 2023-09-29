@@ -19,7 +19,22 @@ class CurrentWeatherManager {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data else { return }
             if let weatherData = try? JSONDecoder().decode(CurrentWeather.self, from: data) {
-                completion((ForecastModel(latitude: latitude, longitude: longtitude, weatherDescription: weatherData.weather?[0].description, id: weatherData.weather?[0].id ?? 803, dayOrNight: String(weatherData.weather?[0].icon?.last ?? "d"), temp: weatherData.main?.temp, tempMin: weatherData.main?.tempMin, tempMax: weatherData.main?.tempMax, pressure: Double(weatherData.main?.pressure ?? 0) * 0.750064, humidity: weatherData.main?.humidity ?? 0, windSpeed: weatherData.wind?.speed ?? 0.0, selectedItem: nil, cityName: weatherData.name, date: String(weatherData.dt ?? 0))))
+                completion((ForecastModel(latitude: latitude, 
+                                          longitude: longtitude,
+                                          weatherDescription: weatherData.weather?[0].description,
+                                          id: weatherData.weather?[0].id ?? 803,
+                                          dayOrNight: String(weatherData.weather?[0].icon?.last ?? "d"),
+                                          temp: weatherData.main?.temp,
+                                          tempMin: weatherData.main?.tempMin,
+                                          tempMax: weatherData.main?.tempMax,
+                                          pressure: Double(CalculateMeasurements.shared.calculatePressure(measurementIndex: UserDefaults.standard.integer(forKey: "pressureIndex"), value: weatherData.main?.pressure ?? 0)),
+                                          humidity: weatherData.main?.humidity ?? 0,
+                                          windSpeed: Double(CalculateMeasurements.shared.calculateWindSpeed(measurementIndex: UserDefaults.standard.integer(forKey: "windIndex"), value: weatherData.wind?.speed ?? 0.0)),
+                                          selectedItem: nil,
+                                          cityName: weatherData.name,
+                                          date: String(weatherData.dt ?? 0))))
+                //Double(weatherData.main?.pressure ?? 0) * 0.750064
+                //weatherData.wind?.speed ?? 0.0
             } else {
                 print("failed parsing JSON")
             }

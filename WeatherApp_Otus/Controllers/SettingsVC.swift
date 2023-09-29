@@ -25,7 +25,7 @@ final class SettingsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
         background.configure(on: self.view)
         view.addSubview(tableView)
         tableView.dataSource = self
@@ -46,6 +46,18 @@ final class SettingsVC: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
     }
+    
+    @objc private func windSegmentedControlPressed(segment: UISegmentedControl) {
+        let selectedParameter = segment.titleForSegment(at: segment.selectedSegmentIndex)
+        UserDefaults.standard.set(selectedParameter, forKey: "windTitle")
+        UserDefaults.standard.set(segment.selectedSegmentIndex, forKey: "windIndex")
+    }
+    
+    @objc private func pressureSegmentedPressed(segment: UISegmentedControl) {
+        let selectedParameter = segment.titleForSegment(at: segment.selectedSegmentIndex)
+        UserDefaults.standard.set(selectedParameter, forKey: "pressureTitle")
+        UserDefaults.standard.set(segment.selectedSegmentIndex, forKey: "pressureIndex")
+    }
 }
 
 extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
@@ -64,6 +76,16 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
         header.textLabel?.font = UIFont.boldSystemFont(ofSize: 14)
     }
     
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        let verticalPadding: CGFloat = 10
+//
+//        let maskLayer = CALayer()
+//        maskLayer.cornerRadius = 15
+//        maskLayer.backgroundColor = UIColor.black.cgColor
+//        maskLayer.frame = CGRect(x: cell.bounds.origin.x, y: cell.bounds.origin.y, width: cell.bounds.width, height: cell.bounds.height * 2).insetBy(dx: 0, dy: verticalPadding / 2)
+//        cell.layer.mask = maskLayer
+//    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
@@ -75,21 +97,46 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.cellID, for: indexPath) as! SettingsTableViewCell
-
+//        let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.cellID, for: indexPath) as! SettingsTableViewCell
+//        cell.segmentedControlForWind.addTarget(self, action: #selector(windSegmentedControlPressed), for: .valueChanged)
         if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.cellID, for: indexPath) as! SettingsTableViewCell
             if indexPath.row == UserDefaults.standard.integer(forKey: "selectedItem") {
                 cell.accessoryType = .checkmark
             } else {
                 cell.accessoryType = .none
             }
             cell.temperatureLabel.text = MeasureType.allCases[indexPath.row].rawValue
-        } else if indexPath.section == 1 {
-            cell.temperatureLabel.text = MeasureType.allCases[indexPath.row + 2].rawValue
+            return cell
+        } else {
+            let cell = OtherMeasurementsCell(style: .default, reuseIdentifier: OtherMeasurementsCell.cellID)
+            cell.contentView.isUserInteractionEnabled = false // чтобы можно было нажать на segmeted control в ячейке
+            cell.segmentedControlForWind.addTarget(self, action: #selector(windSegmentedControlPressed), for: .valueChanged)
+            cell.segmetedControlForPressure.addTarget(self, action: #selector(pressureSegmentedPressed), for: .valueChanged)
+            cell.parameterLabel.text = MeasureType.allCases[indexPath.row + 2].rawValue
+            if indexPath.row == 0 {
+                cell.segmetedControlForPressure.isHidden = true
+                
+                if let value = UserDefaults.standard.value(forKey: "windIndex") {
+                    let selectedIndex = value as! Int
+                    cell.segmentedControlForWind.selectedSegmentIndex = selectedIndex
+                }
+            } else {
+                cell.segmentedControlForWind.isHidden = true
+                if let value = UserDefaults.standard.value(forKey: "pressureIndex") {
+                    let selectedIndex = value as! Int
+                    cell.segmetedControlForPressure.selectedSegmentIndex = selectedIndex
+                }
+            }
             cell.accessoryType = .none
+            return cell
         }
-        return cell
+        //return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -105,6 +152,9 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             UserDefaults.standard.setValue(selectedIndexPath, forKey: "selectedItem")
             UserDefaults.standard.synchronize()
             tableView.reloadData()
+        } else {
+            print(indexPath.section)
         }
     }
 }
+

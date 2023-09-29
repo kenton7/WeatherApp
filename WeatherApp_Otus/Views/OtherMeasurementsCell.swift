@@ -1,24 +1,17 @@
 //
-//  SettingsTableViewCell.swift
+//  OtherMeasurementsCell.swift
 //  WeatherApp_Otus
 //
-//  Created by Илья Кузнецов on 27.09.2023.
+//  Created by Илья Кузнецов on 29.09.2023.
 //
 
 import UIKit
 
-enum MeasureType: String, CaseIterable {
-    case celcius = "Градусы Цельсия (°C)"
-    case farengeight = "Градусы Фаренгейта (°F)"
-    case wind = "Ветер"
-    case pressure = "Давление"
-}
-
-class SettingsTableViewCell: UITableViewCell {
+class OtherMeasurementsCell: UITableViewCell {
     
-    static let cellID = "SettingsTableViewCell"
+    static let cellID = "OtherMeasurementsCell"
     
-    let temperatureLabel: UILabel = {
+    let parameterLabel: UILabel = {
        let label = UILabel()
         label.text = ""
         label.textColor = .white
@@ -31,7 +24,7 @@ class SettingsTableViewCell: UITableViewCell {
     let segmentedControlForWind: UISegmentedControl = {
         var segmentedControl = UISegmentedControl()
         segmentedControl = UISegmentedControl(items: ["м/с", "км/ч", "ми/ч"])
-        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.selectedSegmentIndex = UserDefaults.standard.integer(forKey: "windIndex")
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.backgroundColor = .white
         segmentedControl.tintColor = .blue
@@ -40,7 +33,7 @@ class SettingsTableViewCell: UITableViewCell {
     
     let segmetedControlForPressure: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["мм.рт.ст.", "гПа", "д.рт.ст."])
-        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.selectedSegmentIndex = UserDefaults.standard.integer(forKey: "pressureIndex")
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.backgroundColor = .white
         segmentedControl.tintColor = .blue
@@ -52,22 +45,25 @@ class SettingsTableViewCell: UITableViewCell {
         
         layer.cornerRadius = 15
         backgroundColor = .backgroundColorTabBar
-        addSubview(temperatureLabel)
         selectionStyle = .none
         tintColor = .white
         
+        addSubview(parameterLabel)
+        addSubview(segmentedControlForWind)
+        addSubview(segmetedControlForPressure)
+        
         NSLayoutConstraint.activate([
-            temperatureLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            temperatureLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            temperatureLabel.heightAnchor.constraint(equalToConstant: 30),
-            temperatureLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            parameterLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            parameterLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            parameterLabel.heightAnchor.constraint(equalToConstant: 30),
+            parameterLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             
-//            segmentedControlForWind.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),
-//            segmentedControlForWind.centerYAnchor.constraint(equalTo: centerYAnchor),
-//            segmentedControlForWind.widthAnchor.constraint(equalTo: segmetedControlForPressure.widthAnchor),
-//            
-//            segmetedControlForPressure.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
-//            segmetedControlForPressure.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10)
+            segmentedControlForWind.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            segmentedControlForWind.centerYAnchor.constraint(equalTo: centerYAnchor),
+            segmentedControlForWind.widthAnchor.constraint(equalTo: segmetedControlForPressure.widthAnchor),
+            
+            segmetedControlForPressure.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
+            segmetedControlForPressure.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10)
         ])
     }
     
@@ -84,13 +80,6 @@ class SettingsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let margins = UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 8)
-        contentView.frame = contentView.frame.inset(by: margins)
-        contentView.layer.cornerRadius = 8
     }
 
 }
