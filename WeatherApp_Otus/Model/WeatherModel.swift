@@ -8,7 +8,7 @@
 import Foundation
 
 struct APIKey {
-    static let APIKey = "**************"
+    static let APIKey = "bf6b4e4a53e89885bc70f0045874c122"
 }
 
 struct Coordinates {
