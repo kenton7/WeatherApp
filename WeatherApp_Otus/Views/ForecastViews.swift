@@ -201,6 +201,12 @@ class ForecastViews {
         return view
     }()
     
+    lazy var spinner: CustomLoaderView = {
+        let spinner = CustomLoaderView(squareLength: 100)
+        spinner.isHidden = true
+        return spinner
+    }()
+    
     
     func configure(on view: UIView) {
         background.configure(on: view)
@@ -211,6 +217,7 @@ class ForecastViews {
         view.addSubview(maxTemperatureLabel)
         view.addSubview(minTemperaureLabel)
         view.addSubview(detailStackView)
+        view.addSubview(spinner)
         
         detailStackView.addArrangedSubview(pressureStackView)
         detailStackView.addArrangedSubview(humidityStackView)

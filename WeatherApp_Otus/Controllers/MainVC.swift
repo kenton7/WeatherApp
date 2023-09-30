@@ -13,17 +13,11 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
     private let weatherUIElements = MainWeatherViews()
     private var locationManager = CLLocationManager()
     
-    private lazy var spinner: CustomLoaderView = {
-        let spinner = CustomLoaderView(squareLength: 100)
-        spinner.isHidden = true
-        return spinner
-    }()
-    
     private var weatherModel = [ForecastModel]() {
         didSet {
             DispatchQueue.main.async {
                 self.weatherUIElements.collectionView.reloadData()
-                self.spinner.isHidden = true
+                self.weatherUIElements.spinner.isHidden = true
             }
         }
     }
@@ -36,7 +30,6 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         weatherUIElements.collectionView.dataSource = self
         weatherUIElements.collectionView.delegate = self
         weatherUIElements.configureWeatherImage(on: self.view)
-        view.addSubview(spinner)
         
         weatherUIElements.refreshButton.addTarget(self, action: #selector(refreshButtonPressed), for: .touchUpInside)
         locationManager.requestWhenInUseAuthorization()
@@ -65,8 +58,8 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
     //MARK: -- Добавляем действие на кнопки
     @objc private func refreshButtonPressed() {
         DispatchQueue.main.async {
-            self.spinner.isHidden = false
-            self.spinner.startAnimation(delay: 0.06, replicates: 20)
+            self.weatherUIElements.spinner.isHidden = false
+            self.weatherUIElements.spinner.startAnimation(delay: 0.0, replicates: 20)
         }
         getCurrentWeather()
         getForecast()
@@ -83,8 +76,8 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         CurrentWeatherManager.shared.getWeather(latitude: coordinates?.latitude ?? 0.0, longtitude: coordinates?.longitude ?? 0.0) { [weak self] weatherModel in
             DispatchQueue.main.async {
                 self?.weatherUIElements.setupData(items: weatherModel)
-                self?.spinner.isHidden = true
-                self?.spinner.stopAnimation()
+                self?.weatherUIElements.spinner.isHidden = true
+                self?.weatherUIElements.spinner.stopAnimation()
                 self?.weatherUIElements.collectionView.reloadData()
             }
         }
@@ -125,8 +118,8 @@ extension MainVC: CLLocationManagerDelegate {
         if status == .authorizedWhenInUse {
             locationManager.requestLocation()
             DispatchQueue.main.async {
-                self.spinner.isHidden = false
-                self.spinner.startAnimation(delay: 0.06, replicates: 20)
+                self.weatherUIElements.spinner.isHidden = false
+                self.weatherUIElements.spinner.startAnimation(delay: 0.06, replicates: 20)
             }
         }
     }

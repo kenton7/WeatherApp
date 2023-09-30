@@ -44,7 +44,6 @@ class ForecastManager {
     func getForecast(latitude: Double, longtitude: Double, completion: @escaping ([ForecastModel]) -> Void) {
         
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longtitude)&units=\(UserDefaults.standard.string(forKey: "units") ?? "metric")&lang=ru&appid=\(APIKey.APIKey)") else { return }
-        print(url)
         let request = URLRequest(url: url)
         let calendar = Calendar.current
         let df = DateFormatter()

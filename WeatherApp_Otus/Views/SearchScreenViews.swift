@@ -50,6 +50,12 @@ class SearchScreenViews {
         return tableView
     }()
     
+    lazy var spinner: CustomLoaderView = {
+        let spinner = CustomLoaderView(squareLength: 100)
+        spinner.isHidden = true
+        return spinner
+    }()
+    
     
     //MARK: - Constraints
     func configureUIOn(view: UIView) {
@@ -57,6 +63,7 @@ class SearchScreenViews {
         view.addSubview(locationButton)
         view.addSubview(searchBar)
         view.addSubview(tableView)
+        view.addSubview(spinner)
         
         
         NSLayoutConstraint.activate([

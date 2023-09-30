@@ -10,24 +10,7 @@ import UIKit
 final class ForecastVC: UIViewController {
     
     private let forecastViews = ForecastViews()
-    private var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.showsVerticalScrollIndicator = false
-        tableView.separatorColor = .clear
-        tableView.backgroundColor = .clear
-        tableView.register(ForecastTableViewCell.self, forCellReuseIdentifier: ForecastTableViewCell.cellID)
-        return tableView
-    }()
     var forecastModel = [ForecastModel]()
-    private var searchVC = SearchVC()
-    
-    private lazy var spinner: CustomLoaderView = {
-        let spinner = CustomLoaderView(squareLength: 100)
-        spinner.isHidden = true
-        return spinner
-    }()
-    
     var coordinates: Coordinates?
     
     override func viewDidLoad() {
@@ -41,7 +24,6 @@ final class ForecastVC: UIViewController {
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
         forecastViews.configure(on: view)
-        view.addSubview(spinner)
         forecastViews.tableView.delegate = self
         forecastViews.tableView.dataSource = self
     }
@@ -52,7 +34,7 @@ final class ForecastVC: UIViewController {
         view.alpha = 1.0
         ForecastManager.shared.getForecast(latitude: coordinates?.latitude ?? 0.0, longtitude: coordinates?.longitude ?? 0.0) { forecast in
             DispatchQueue.main.async {
-                self.spinner.isHidden = false
+                self.forecastViews.spinner.isHidden = false
             }
             self.weather = forecast
         }
@@ -72,7 +54,7 @@ final class ForecastVC: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.forecastViews.tableView.reloadData()
-                self.spinner.isHidden = true
+                self.forecastViews.spinner.isHidden = true
             }
         }
     }
@@ -97,5 +79,4 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
-    
 }

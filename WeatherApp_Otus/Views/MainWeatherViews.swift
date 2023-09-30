@@ -272,6 +272,12 @@ class MainWeatherViews {
         return collectionView
     }()
     
+    lazy var spinner: CustomLoaderView = {
+        let spinner = CustomLoaderView(squareLength: 100)
+        spinner.isHidden = true
+        return spinner
+    }()
+    
     //MARK: -- Конфигурация элементов
     func configureWeatherImage(on view: UIView) {
         
@@ -291,6 +297,7 @@ class MainWeatherViews {
         view.addSubview(winddStackView)
         view.addSubview(sevenDaysForecast)
         view.addSubview(todayLabel)
+        view.addSubview(spinner)
         
         //weatherDataStackView.addArrangedSubview(cityLabel)
         weatherDataStackView.addArrangedSubview(weatherDescription)

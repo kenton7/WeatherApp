@@ -14,17 +14,11 @@ final class SearchVC: UIViewController {
     private let uiElements = SearchScreenViews()
     private var locationManager = CLLocationManager()
     
-    private lazy var spinner: CustomLoaderView = {
-        let spinner = CustomLoaderView(squareLength: 100)
-        spinner.isHidden = true
-        return spinner
-    }()
-    
     private var weatherData = [ForecastModel]() {
         didSet {
             DispatchQueue.main.async {
                 self.uiElements.tableView.reloadData()
-                self.spinner.isHidden = true
+                self.uiElements.spinner.isHidden = true
             }
         }
     }
@@ -40,7 +34,6 @@ final class SearchVC: UIViewController {
         view.addGestureRecognizer(tap)
         tap.cancelsTouchesInView = false // позволяет делать тап по ячейке. Настройка нужна, потому что есть жест
         uiElements.configureUIOn(view: view)
-        view.addSubview(spinner)
         uiElements.tableView.dataSource = self
         uiElements.tableView.delegate = self
         uiElements.searchBar.delegate = self
@@ -73,8 +66,8 @@ final class SearchVC: UIViewController {
     
     @objc private func locationButtonPressed() {
         DispatchQueue.main.async {
-            self.spinner.isHidden = false
-            self.spinner.startAnimation(delay: 0.06, replicates: 20)
+            self.uiElements.spinner.isHidden = false
+            self.uiElements.spinner.startAnimation(delay: 0.06, replicates: 20)
         }
         
         CurrentWeatherManager.shared.getWeather(latitude: coordinates?.latitude ?? 0.0, longtitude: coordinates?.longitude ?? 0.0) { [weak self] forecastModel in
@@ -97,7 +90,7 @@ final class SearchVC: UIViewController {
                                                  selectedItem: forecastModel.selectedItem ?? 0,
                                                  date: forecastModel.date ?? ""))
                     self.uiElements.tableView.reloadData()
-                    self.spinner.isHidden = true
+                    self.uiElements.spinner.isHidden = true
                 }
             }
         }
@@ -144,7 +137,6 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
                     self.forecastRealm?[indexPath.section].windSpeed = forecast.windSpeed ?? 0.0
                     self.forecastRealm?[indexPath.section].date = forecast.date ?? ""
                 }
-                
                 cell.setupData(items: self.forecastRealm, indexPath: indexPath)
             }
         }
@@ -300,7 +292,7 @@ extension SearchVC: UISearchBarDelegate {
                                                  selectedItem: forecastModel.selectedItem ?? 0,
                                                  date: forecastModel.date ?? ""))
                     self.uiElements.tableView.reloadData()
-                    self.spinner.isHidden = true
+                    self.uiElements.spinner.isHidden = true
                 }
             }
         }
