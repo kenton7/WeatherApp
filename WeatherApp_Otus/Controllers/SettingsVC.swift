@@ -10,41 +10,20 @@ import UIKit
 final class SettingsVC: UIViewController {
     
     private let background = Background()
-    private var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.cellID)
-        tableView.backgroundColor = .clear
-        tableView.showsVerticalScrollIndicator = false
-        tableView.separatorColor = .clear
-        return tableView
-    }()
-    
     private let settingsVC = SettingsViews()
     private var selectedIndexPath: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         background.configure(on: self.view)
-        view.addSubview(tableView)
-        tableView.dataSource = self
-        tableView.delegate = self
-        constraintsTableView()
+        settingsVC.configure(on: self.view)
+        settingsVC.tableView.dataSource = self
+        settingsVC.tableView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
-    private func constraintsTableView() {
-        NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
-        ])
     }
     
     @objc private func windSegmentedControlPressed(segment: UISegmentedControl) {
@@ -76,16 +55,6 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
         header.textLabel?.font = UIFont.boldSystemFont(ofSize: 14)
     }
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let verticalPadding: CGFloat = 10
-//
-//        let maskLayer = CALayer()
-//        maskLayer.cornerRadius = 15
-//        maskLayer.backgroundColor = UIColor.black.cgColor
-//        maskLayer.frame = CGRect(x: cell.bounds.origin.x, y: cell.bounds.origin.y, width: cell.bounds.width, height: cell.bounds.height * 2).insetBy(dx: 0, dy: verticalPadding / 2)
-//        cell.layer.mask = maskLayer
-//    }
-    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
@@ -102,8 +71,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.cellID, for: indexPath) as! SettingsTableViewCell
-//        cell.segmentedControlForWind.addTarget(self, action: #selector(windSegmentedControlPressed), for: .valueChanged)
+        
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.cellID, for: indexPath) as! SettingsTableViewCell
             if indexPath.row == UserDefaults.standard.integer(forKey: "selectedItem") {
@@ -136,7 +104,6 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             cell.accessoryType = .none
             return cell
         }
-        //return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -151,9 +118,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             }
             UserDefaults.standard.setValue(selectedIndexPath, forKey: "selectedItem")
             UserDefaults.standard.synchronize()
-            tableView.reloadData()
-        } else {
-            print(indexPath.section)
+            settingsVC.tableView.reloadData()
         }
     }
 }

@@ -12,15 +12,6 @@ import RealmSwift
 final class SearchVC: UIViewController {
     
     private let uiElements = SearchScreenViews()
-    private var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.cellID)
-        tableView.backgroundColor = .clear
-        tableView.showsVerticalScrollIndicator = false
-        tableView.separatorColor = .clear
-        return tableView
-    }()
     private var locationManager = CLLocationManager()
     
     private lazy var spinner: CustomLoaderView = {
@@ -32,14 +23,14 @@ final class SearchVC: UIViewController {
     private var weatherData = [ForecastModel]() {
         didSet {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.uiElements.tableView.reloadData()
                 self.spinner.isHidden = true
             }
         }
     }
     
-    let realm = try! Realm()
-    var forecastRealm: Results<ForecastRealm>?
+    private let realm = try! Realm()
+    private var forecastRealm: Results<ForecastRealm>?
     private var coordinates: Coordinates?
     
     override func viewDidLoad() {
@@ -50,11 +41,9 @@ final class SearchVC: UIViewController {
         tap.cancelsTouchesInView = false // позволяет делать тап по ячейке. Настройка нужна, потому что есть жест
         uiElements.configureUIOn(view: view)
         view.addSubview(spinner)
-        tableView.dataSource = self
-        tableView.delegate = self
+        uiElements.tableView.dataSource = self
+        uiElements.tableView.delegate = self
         uiElements.searchBar.delegate = self
-        view.addSubview(tableView)
-        constraintsForTableView()
         uiElements.locationButton.addTarget(self, action: #selector(locationButtonPressed), for: .touchUpInside)
         
         locationManager.requestWhenInUseAuthorization()
@@ -72,23 +61,14 @@ final class SearchVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        view.alpha = 1.0
         navigationController?.setNavigationBarHidden(true, animated: true)
-        tableView.reloadData()
+        view.alpha = 1.0
+        uiElements.tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         view.alpha = 0.0
-    }
-    
-    private func constraintsForTableView() {
-        NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            tableView.topAnchor.constraint(equalTo: uiElements.searchBar.bottomAnchor, constant: 20),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
-        ])
     }
     
     @objc private func locationButtonPressed() {
@@ -116,12 +96,10 @@ final class SearchVC: UIViewController {
                                                  windSpeed: forecastModel.windSpeed ?? 0.0,
                                                  selectedItem: forecastModel.selectedItem ?? 0,
                                                  date: forecastModel.date ?? ""))
-                    //self.realm.add(ForecastRealm(cityName: forecastModel.cityName ?? "", dayOrNight: forecastModel.dayOrNight ?? "d", descrption: forecastModel.description ?? "", id: forecastModel.id ?? 803, temp: forecastModel.temp ?? 0.0))
-                    self.tableView.reloadData()
+                    self.uiElements.tableView.reloadData()
                     self.spinner.isHidden = true
                 }
             }
-            //self.weatherData.append(forecastModel)
         }
     }
     
@@ -139,7 +117,6 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        //return weatherData.count
         return forecastRealm?.count ?? 0
     }
     
@@ -167,22 +144,10 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
                     self.forecastRealm?[indexPath.section].windSpeed = forecast.windSpeed ?? 0.0
                     self.forecastRealm?[indexPath.section].date = forecast.date ?? ""
                 }
-                cell.cityLabel.text = self.forecastRealm?[indexPath.section].cityName
-                cell.weatherDescriptionLabel.text = (self.forecastRealm?[indexPath.section].weatherDescription.prefix(1).uppercased())! + "\(self.forecastRealm![indexPath.section].weatherDescription.lowercased().dropFirst())"
-                cell.weatherImage.image = WeatherImages.shared.weatherImages(id: self.forecastRealm?[indexPath.section].id ?? 803, pod: self.forecastRealm?[indexPath.section].dayOrNight)
-                cell.temperatureLabel.text = "\(Int(self.forecastRealm?[indexPath.section].temp.rounded() ?? 0))°"
+                
+                cell.setupData(items: self.forecastRealm, indexPath: indexPath)
             }
         }
-//        cell.cityLabel.text = self.forecastRealm?[indexPath.section].cityName
-//        cell.weatherDescriptionLabel.text = (self.forecastRealm?[indexPath.section].weatherDescription.prefix(1).uppercased())! + "\(self.forecastRealm![indexPath.section].weatherDescription.lowercased().dropFirst())"
-//        cell.weatherImage.image = WeatherImages.shared.weatherImages(id: self.forecastRealm?[indexPath.section].id ?? 803, pod: self.forecastRealm?[indexPath.section].dayOrNight)
-//        cell.temperatureLabel.text = "\(Int(self.forecastRealm?[indexPath.section].temp.rounded() ?? 0))°"
-        
-        //                        cell.weatherDescriptionLabel.text = self.forecastRealm![indexPath.section].description.prefix(1).uppercased() + self.forecastRealm![indexPath.section].description.lowercased().dropFirst()
-        //cell.cityLabel.text = weatherData[indexPath.section].cityName
-        //        cell.weatherDescriptionLabel.text = weatherData[indexPath.section].description!.prefix(1).uppercased() + weatherData[indexPath.section].description!.lowercased().dropFirst()
-        //        cell.weatherImage.image = WeatherImages.shared.weatherImages(id: Int(weatherData[indexPath.section].id ?? 803), pod: weatherData[indexPath.section].dayOrNight)
-        //        cell.temperatureLabel.text = "\(Int(weatherData[indexPath.section].temp?.rounded() ?? 0))°"
         return cell
     }
     
@@ -226,10 +191,8 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
                 try! self.realm.write {
                     self.realm.delete(self.forecastRealm![indexPath.section])
                 }
-                //self?.tableView.deleteRows(at: [indexPath], with: .automatic)
-                self.tableView.reloadData()
+                self.uiElements.tableView.reloadData()
             }
-            //self?.weatherData.remove(at: indexPath.section)
             completion(true)
         }
         
@@ -256,9 +219,6 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
         let forecastVC = ForecastVC()
         if let transferData = forecastRealm?[indexPath.section] {
             forecastVC.coordinates = Coordinates(latitude: transferData.latitude, longitude: transferData.longitude)
-            //forecastVC.coordinates?.longitude = transferData.longitude
-//            forecastVC.lat = transferData.latitude
-//            forecastVC.long = transferData.longitude
             
             forecastVC.forecastModel.append(ForecastModel(
                 latitude: transferData.latitude,
@@ -276,6 +236,7 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
                 cityName: transferData.cityName,
                 date: transferData.date))
         }
+        
         forecastVC.hidesBottomBarWhenPushed = false
         navigationController?.pushViewController(forecastVC, animated: true)
     }
@@ -298,17 +259,12 @@ extension SearchVC: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         coordinates = Coordinates(latitude: locValue.latitude, longitude: locValue.longitude)
-//        long = locValue.longitude
-//        lat = locValue.latitude
         manager.stopUpdatingLocation()
     }
 }
 
 //MARK: - UISearchBarDelegate
 extension SearchVC: UISearchBarDelegate {
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        print("searchText \(searchText)")
-//    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchingCity = searchBar.text else { return }
@@ -343,7 +299,7 @@ extension SearchVC: UISearchBarDelegate {
                                                  windSpeed: forecastModel.windSpeed ?? 0.0,
                                                  selectedItem: forecastModel.selectedItem ?? 0,
                                                  date: forecastModel.date ?? ""))
-                    self.tableView.reloadData()
+                    self.uiElements.tableView.reloadData()
                     self.spinner.isHidden = true
                 }
             }

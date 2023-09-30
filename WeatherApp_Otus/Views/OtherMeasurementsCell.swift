@@ -22,12 +22,10 @@ class OtherMeasurementsCell: UITableViewCell {
     }()
     
     let segmentedControlForWind: UISegmentedControl = {
-        var segmentedControl = UISegmentedControl()
-        segmentedControl = UISegmentedControl(items: ["м/с", "км/ч", "ми/ч"])
+        let segmentedControl = UISegmentedControl(items: ["м/с", "км/ч", "ми/ч"])
         segmentedControl.selectedSegmentIndex = UserDefaults.standard.integer(forKey: "windIndex")
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.backgroundColor = .white
-        segmentedControl.tintColor = .blue
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 13)], for: .normal)
         return segmentedControl
     }()
     
@@ -35,8 +33,7 @@ class OtherMeasurementsCell: UITableViewCell {
         let segmentedControl = UISegmentedControl(items: ["мм.рт.ст.", "гПа", "д.рт.ст."])
         segmentedControl.selectedSegmentIndex = UserDefaults.standard.integer(forKey: "pressureIndex")
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.backgroundColor = .white
-        segmentedControl.tintColor = .blue
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 13)], for: .normal)
         return segmentedControl
     }()
     

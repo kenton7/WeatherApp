@@ -10,6 +10,8 @@ import Foundation
 
 class MainWeatherViews {
     
+    private let calendar = Calendar.current
+    
     //MARK: -- UI Elements
     private let background = Background()
     
@@ -259,11 +261,23 @@ class MainWeatherViews {
         return label
     }()
     
+    let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(WeatherCollectionViewCell.self, forCellWithReuseIdentifier: WeatherCollectionViewCell.cellID)
+        return collectionView
+    }()
+    
     //MARK: -- Конфигурация элементов
     func configureWeatherImage(on view: UIView) {
         
         background.configure(on: view)
         
+        view.addSubview(collectionView)
         view.addSubview(weatherImage)
         view.addSubview(weatherDescription)
         view.addSubview(temperatureLabel)
@@ -305,39 +319,23 @@ class MainWeatherViews {
         refreshButton.heightAnchor.constraint(equalToConstant: 46).isActive = true
         refreshButton.widthAnchor.constraint(equalToConstant: 46).isActive = true
         refreshButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
-        
-        //weatherDescription.topAnchor.constraint(equalTo: weatherDataStackView.topAnchor, constant: 10).isActive = true
-        
-        //weatherDataStackView.topAnchor.constraint(equalTo: cityLabel.safeAreaLayoutGuide.bottomAnchor, constant: 10).isActive = true
-        //weatherDescription.topAnchor.constraint(equalTo: cityLabel.safeAreaLayoutGuide.bottomAnchor, constant: 10).isActive = true
+
         weatherDescription.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        //weatherDataStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        //weatherDataStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         weatherDataStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         weatherDescription.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 5).isActive = true
         
-        //weatherImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
         weatherImage.widthAnchor.constraint(equalToConstant: 150).isActive = true
         temperatureLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        //temperatureLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
         dateLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        //dateLabel.bottomAnchor.constraint(equalTo: detailStackView.topAnchor, constant: -10).isActive = true
-        
-        //visibilityStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
-        //visibilityStackView.topAnchor.constraint(equalTo: weatherDataStackView.bottomAnchor, constant: 20).isActive = true
-        pressureImage.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        //pressureLabel.leadingAnchor.constraint(equalTo: detailStackView.leadingAnchor, constant: 0).isActive = true
 
-        //humidityStackView.leadingAnchor.constraint(equalTo: visibilityStackView.trailingAnchor, constant: 5).isActive = true
+        pressureImage.heightAnchor.constraint(equalToConstant: 24).isActive = true
+
         humidityStackView.topAnchor.constraint(equalTo: visibilityStackView.topAnchor).isActive = true
         humidityImage.heightAnchor.constraint(equalToConstant: 24).isActive = true
         humidityLabel.centerXAnchor.constraint(equalTo: humidityImage.centerXAnchor).isActive = true
 
-        //winddStackView.leadingAnchor.constraint(equalTo: humidityStackView.trailingAnchor, constant: 5).isActive = true
-        //winddStackView.topAnchor.constraint(equalTo: humidityStackView.topAnchor).isActive = true
         windImage.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
-
         detailStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         detailStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         detailStackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
@@ -349,6 +347,21 @@ class MainWeatherViews {
         
         todayLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         todayLabel.topAnchor.constraint(equalTo: detailStackView.bottomAnchor, constant: 10).isActive = true
+        
+        collectionView.topAnchor.constraint(equalTo: sevenDaysForecast.bottomAnchor, constant: 10).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 110).isActive = true
+    }
+    
+    func setupData(items: ForecastModel) {
+        weatherImage.image = WeatherImages.shared.weatherImages(id: items.id ?? 803, pod: calendar.component(.hour, from: Date()) >= 20 ? "n" : "d")
+        temperatureLabel.text = "\(Int(items.temp?.rounded() ?? 0.0))°"
+        pressureLabel.text = "\(Int(items.pressure ?? 0.0)) \(UserDefaults.standard.string(forKey: "pressureTitle") ?? "мм.рт.ст.")"
+        humidityLabel.text = "\(Int(items.humidity ?? 0))%"
+        weatherDescription.text = (items.weatherDescription?.prefix(1).uppercased() ?? "") + ((items.weatherDescription?.lowercased().dropFirst() ?? ""))
+        cityLabel.text = items.cityName
+        windLabel.text = "\(Int(items.windSpeed?.rounded() ?? 0.0)) \(UserDefaults.standard.string(forKey: "windTitle") ?? "м/с")"
     }
 }
 

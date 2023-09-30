@@ -12,8 +12,6 @@ class CurrentWeatherManager {
     static let shared = CurrentWeatherManager()
     
     func getWeather(latitude: Double, longtitude: Double, completion: @escaping ((ForecastModel)) -> Void) {
-//        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longtitude)&units=metric&lang=ru&appid=\(APIKey.APIKey)") else { return }
-        
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longtitude)&units=\(UserDefaults.standard.string(forKey: "units") ?? "metric")&lang=ru&appid=\(APIKey.APIKey)") else { return }
         let request = URLRequest(url: url)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -33,8 +31,6 @@ class CurrentWeatherManager {
                                           selectedItem: nil,
                                           cityName: weatherData.name,
                                           date: String(weatherData.dt ?? 0))))
-                //Double(weatherData.main?.pressure ?? 0) * 0.750064
-                //weatherData.wind?.speed ?? 0.0
             } else {
                 print("failed parsing JSON")
             }

@@ -8,30 +8,26 @@
 import UIKit
 
 class SettingsViews: UIView {
-    
-    private let temperatureLabel: UILabel = {
-       let label = UILabel()
-        label.text = "Единицы измерения"
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 17)
-        return label
-    }()
 
-//    private let segmentedControl: UISegmentedControl = {
-//        let segmentedControl = UISegmentedControl()
-//        segmentedControl.setTitle("Градусы Цельсия °C", forSegmentAt: 0)
-//        segmentedControl.setTitle("Градусы Фаренгейта °F", forSegmentAt: 1)
-//        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-//        segmentedControl.tintColor = .backgroundColorTabBar
-//        return segmentedControl
-//    }()
+    let tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.cellID)
+        tableView.backgroundColor = .clear
+        tableView.showsVerticalScrollIndicator = false
+        tableView.separatorColor = .clear
+        return tableView
+    }()
     
     func configure(on view: UIView) {
-        //view.addSubview(temperatureLabel)
-        //view.addSubview(segmentedControl)
-
+        view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+        ])
     }
 
 }

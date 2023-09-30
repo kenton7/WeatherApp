@@ -146,6 +146,16 @@ class ForecastViews {
         return label
     }()
     
+    let tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.showsVerticalScrollIndicator = false
+        tableView.separatorColor = .clear
+        tableView.backgroundColor = .clear
+        tableView.register(ForecastTableViewCell.self, forCellReuseIdentifier: ForecastTableViewCell.cellID)
+        return tableView
+    }()
+    
     //MARK: -- Stack Views
     private let detailStackView: UIStackView = {
         let view = UIStackView()
@@ -194,6 +204,8 @@ class ForecastViews {
     
     func configure(on view: UIView) {
         background.configure(on: view)
+        
+        view.addSubview(tableView)
         view.addSubview(weatherView)
         view.addSubview(weatherImage)
         view.addSubview(maxTemperatureLabel)
@@ -239,7 +251,21 @@ class ForecastViews {
             detailStackView.topAnchor.constraint(equalTo: weatherImage.bottomAnchor, constant: 5),
             detailStackView.widthAnchor.constraint(equalTo: weatherView.widthAnchor, multiplier: 0.9),
             detailStackView.heightAnchor.constraint(equalToConstant: 100),
+            
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            tableView.topAnchor.constraint(equalTo: weatherView.bottomAnchor, constant: 20),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30)
         ])
+    }
+    
+    func setupData(items: [ForecastModel]) {
+        maxTemperatureLabel.text = "\(Int(items.last?.tempMax?.rounded() ?? 0.0))°"
+        minTemperaureLabel.text = " /\(Int(items.last?.tempMin?.rounded() ?? 0.0))°"
+        weatherImage.image = WeatherImages.shared.weatherImages(id: items.last?.id ?? 803, pod: items.last?.dayOrNight)
+        humidityLabel.text = "\(items.last?.humidity ?? 0)%"
+        pressureLabel.text = "\(Int(items.last?.pressure?.rounded() ?? 0)) \(UserDefaults.standard.string(forKey: "pressureTitle") ?? "мм.рт.ст.")"
+        windLabel.text = "\(Int(items.last?.windSpeed?.rounded() ?? 0)) \(UserDefaults.standard.string(forKey: "windTitle") ?? "м/с")"
     }
     
 }

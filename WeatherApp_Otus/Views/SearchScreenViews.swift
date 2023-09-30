@@ -40,12 +40,23 @@ class SearchScreenViews {
         return searchBar
     }()
     
+    let tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.cellID)
+        tableView.backgroundColor = .clear
+        tableView.showsVerticalScrollIndicator = false
+        tableView.separatorColor = .clear
+        return tableView
+    }()
+    
     
     //MARK: - Constraints
     func configureUIOn(view: UIView) {
         background.configure(on: view)
         view.addSubview(locationButton)
         view.addSubview(searchBar)
+        view.addSubview(tableView)
         
         
         NSLayoutConstraint.activate([
@@ -56,7 +67,12 @@ class SearchScreenViews {
             
             searchBar.centerYAnchor.constraint(equalTo: locationButton.centerYAnchor),
             searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            searchBar.trailingAnchor.constraint(equalTo: locationButton.safeAreaLayoutGuide.leadingAnchor, constant: -10)
+            searchBar.trailingAnchor.constraint(equalTo: locationButton.safeAreaLayoutGuide.leadingAnchor, constant: -10),
+            
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
     }
 }

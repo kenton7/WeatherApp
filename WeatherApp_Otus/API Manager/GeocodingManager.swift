@@ -12,7 +12,6 @@ class GeocodingManager {
     
     func search(city: String, completion: @escaping ((ForecastModel)) -> Void) {
         guard let url = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(city)&limit=1&appid=\(APIKey.APIKey)") else { return }
-        print(url)
         let request = URLRequest(url: url)
         let task = URLSession.shared.dataTask(with: request, completionHandler:  { data, resposne, error in
             guard let data = data else { return }
@@ -39,7 +38,6 @@ class GeocodingManager {
                                               selectedItem: nil,
                                               cityName: geocoding.first?.localNames?["ru"],
                                               date: forecastModel.date)))
-                    //print("Погода в \(geocoding.first?.localNames?["ru"]) сейчас: \(forecastModel.temp) градусов")
                 }
             } else {
                 print("failed parsing JSON")

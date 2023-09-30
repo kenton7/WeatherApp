@@ -10,6 +10,7 @@ import UIKit
 class WeatherCollectionViewCell: UICollectionViewCell {
     
     static let cellID = "WeatherCollectionViewCell"
+    private let calendar = Calendar.current
     
     private let mainImageView: UIImageView = {
        let imageView = UIImageView()
@@ -74,12 +75,6 @@ class WeatherCollectionViewCell: UICollectionViewCell {
             stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             
-            //timeLabel.topAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.topAnchor),
-            //timeLabel.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 5),
-            //timeLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 0),
-            //timeLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 0),
-            //timeLabel.heightAnchor.constraint(equalToConstant: 20),
-            
             weatherIcon.centerXAnchor.constraint(equalTo: stackView.centerXAnchor),
             weatherIcon.centerYAnchor.constraint(equalTo: stackView.centerYAnchor),
             weatherIcon.heightAnchor.constraint(equalToConstant: 30),
@@ -87,10 +82,14 @@ class WeatherCollectionViewCell: UICollectionViewCell {
             
             temperatureLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 0),
             temperatureLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 0),
-            //temperatureLabel.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 15),
-            //temperatureLabel.topAnchor.constraint(equalTo: weatherIcon.bottomAnchor, constant: 5)
-            
         ])
+    }
+    
+    func configureCell(items: [ForecastModel], indexPath: IndexPath) {
+            timeLabel.font = UIFont.boldSystemFont(ofSize: 15)
+            timeLabel.text = "\(items[indexPath.row].date ?? "")"
+            temperatureLabel.text = "\(Int(items[indexPath.row].temp?.rounded() ?? 0))°"
+            weatherIcon.image = WeatherImages.shared.weatherImages(id: items[indexPath.row].id ?? 803, pod: items[indexPath.row].dayOrNight)
     }
     
     required init?(coder: NSCoder) {

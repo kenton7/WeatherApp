@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class SearchTableViewCell: UITableViewCell {
     
@@ -97,6 +98,14 @@ class SearchTableViewCell: UITableViewCell {
             temperatureLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             temperatureLabel.heightAnchor.constraint(equalToConstant: 50)
         ])
+    }
+    
+    func setupData(items: Results<ForecastRealm>?, indexPath: IndexPath) {
+        guard let items = items else { return }
+        cityLabel.text = items[indexPath.section].cityName
+        weatherDescriptionLabel.text = items[indexPath.section].weatherDescription.prefix(1).uppercased() + "\(items[indexPath.section].weatherDescription.lowercased().dropFirst())"
+        weatherImage.image = WeatherImages.shared.weatherImages(id: items[indexPath.section].id, pod: items[indexPath.section].dayOrNight)
+        temperatureLabel.text = "\(Int(items[indexPath.section].temp.rounded()))°"
     }
     
     required init?(coder: NSCoder) {

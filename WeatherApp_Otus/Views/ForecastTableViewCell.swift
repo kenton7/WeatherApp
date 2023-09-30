@@ -105,6 +105,14 @@ class ForecastTableViewCell: UITableViewCell {
         ])
     }
     
+    func setupData(items: [ForecastModel], indexPath: IndexPath) {
+        weatherDescription.text = "".configureWeatherDescription(info: items[indexPath.section].weatherDescription ?? "")
+        dayLabel.text = items[indexPath.section].date?.capitalized
+        minTemp.text = "\(Int(items[indexPath.section].tempMin?.rounded() ?? 0.0))°"
+        maxTemp.text = "\(Int(items[indexPath.section].tempMax?.rounded() ?? 0.0))°"
+        weatherImage.image = WeatherImages.shared.weatherImages(id: items[indexPath.section].id ?? 803, pod: items[indexPath.section].dayOrNight ?? "d")
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
