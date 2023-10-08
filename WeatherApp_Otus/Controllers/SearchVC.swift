@@ -95,7 +95,6 @@ final class SearchVC: UIViewController {
             }
         }
     }
-    
     //Убираем клаву при тапе на экран
     @objc func dismissKeyboard() {
         view.endEditing(true)
@@ -228,11 +227,9 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
                 cityName: transferData.cityName,
                 date: transferData.date))
         }
-        
         forecastVC.hidesBottomBarWhenPushed = false
         navigationController?.pushViewController(forecastVC, animated: true)
     }
-    
 }
 
 //MARK: - CLLocationManagerDelegate

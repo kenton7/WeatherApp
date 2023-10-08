@@ -202,10 +202,10 @@
             filePath = "WeatherApp_Otus/Controllers/MainVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
-            landmarkName = "MainVC"
-            landmarkType = "21">
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -266,8 +266,8 @@
             filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "getForecastWithCoordinates(latitude:longtitude:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,10 +282,10 @@
             filePath = "WeatherApp_Otus/Controllers/MainVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "collectionView(_:cellForItemAt:)"
-            landmarkType = "7">
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "MainVC"
+            landmarkType = "3">
             <Locations>
                <Location
                   uuid = "7F0F35A7-6B0B-4D20-9031-398C026E873E - ecac411bd00ac8d"
@@ -330,8 +330,8 @@
             filePath = "WeatherApp_Otus/Controllers/MainVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "getForecast()"
             landmarkType = "7">
             <Locations>
@@ -378,8 +378,8 @@
             filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "getForecastWithCoordinates(latitude:longtitude:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -394,8 +394,8 @@
             filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "getForecastWithCoordinates(latitude:longtitude:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -410,8 +410,8 @@
             filePath = "WeatherApp_Otus/Controllers/MainVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
             <Locations>
@@ -504,8 +504,8 @@
             filePath = "WeatherApp_Otus/API Manager/GeocodingManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "search(city:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -520,8 +520,8 @@
             filePath = "WeatherApp_Otus/Controllers/SearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "SearchVC"
             landmarkType = "21">
          </BreakpointContent>
@@ -536,8 +536,8 @@
             filePath = "WeatherApp_Otus/Controllers/MainVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
             <Locations>
@@ -584,8 +584,8 @@
             filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "getForecastWithCoordinates(latitude:longtitude:completion:)"
             landmarkType = "7">
             <Locations>
@@ -647,8 +647,8 @@
             filePath = "WeatherApp_Otus/Controllers/MainVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "getForecast()"
             landmarkType = "7">
             <Locations>
@@ -711,8 +711,8 @@
             filePath = "WeatherApp_Otus/API Manager/GeocodingManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "search(city:completion:)"
             landmarkType = "7">
             <Locations>
@@ -774,8 +774,8 @@
             filePath = "WeatherApp_Otus/Controllers/SearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -790,8 +790,8 @@
             filePath = "WeatherApp_Otus/API Manager/GeocodingManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "search(city:completion:)"
             landmarkType = "7">
             <Locations>
@@ -838,8 +838,8 @@
             filePath = "WeatherApp_Otus/Controllers/SearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -854,8 +854,8 @@
             filePath = "WeatherApp_Otus/Controllers/SearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
             <Locations>
@@ -917,8 +917,8 @@
             filePath = "WeatherApp_Otus/API Manager/CurrentWeatherManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "getWeather(latitude:longtitude:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -933,8 +933,8 @@
             filePath = "WeatherApp_Otus/Controllers/SearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -949,8 +949,8 @@
             filePath = "WeatherApp_Otus/API Manager/ForecastManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "getForecast(latitude:longtitude:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -965,8 +965,8 @@
             filePath = "WeatherApp_Otus/Controllers/ForecastVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "numberOfSections(in:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -981,8 +981,8 @@
             filePath = "WeatherApp_Otus/API Manager/GeocodingManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "search(city:completion:)"
             landmarkType = "7">
             <Locations>
@@ -1029,8 +1029,8 @@
             filePath = "WeatherApp_Otus/Controllers/SearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
             <Locations>
@@ -1187,6 +1187,19 @@
                   endingLineNumber = "46"
                   offsetFromSymbolStart = "92">
                </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+         <BreakpointContent
+            uuid = "3F8BD616-5852-4930-B670-24052D4C269C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            symbolName = ""
+            moduleName = "">
+            <Locations>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>

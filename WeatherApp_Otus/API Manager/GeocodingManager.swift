@@ -10,10 +10,15 @@ import Foundation
 class GeocodingManager {
     static let shared = GeocodingManager()
     
+    
+    /// Функция для поиска города и запроса погоды в этом городе
+    /// - Parameters:
+    ///   - city: Город
+    ///   - completion: в комплишине используем модель прогноза погоды
     func search(city: String, completion: @escaping ((ForecastModel)) -> Void) {
         guard let url = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(city)&limit=1&appid=\(APIKey.APIKey)") else { return }
         let request = URLRequest(url: url)
-        let task = URLSession.shared.dataTask(with: request, completionHandler:  { data, resposne, error in
+        let task = URLSession.shared.dataTask(with: request, completionHandler:  { data, response, error in
             guard let data = data else { return }
             
             if let geocoding = try? JSONDecoder().decode(Geocoding.self, from: data) {

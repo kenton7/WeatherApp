@@ -10,6 +10,12 @@ import Foundation
 class CalculateMeasurements {
     static let shared = CalculateMeasurements()
     
+    
+    /// Функция переводит давление в другую систему исчисления
+    /// - Parameters:
+    ///   - measurementIndex: Индекс сегментед контола, который выбрал юзер
+    ///   - value: значение давления, полученное с сервера
+    /// - Returns: возвращаем результат в другой системе исчесления
     func calculatePressure(measurementIndex: Int, value: Int) -> Int {
         var result = 0
         switch measurementIndex {
@@ -25,6 +31,12 @@ class CalculateMeasurements {
         return result
     }
     
+    
+    /// Функция переводит скорость ветра в разные системы исчисления
+    /// - Parameters:
+    ///   - measurementIndex: Индекс сегментед контрола
+    ///   - value: Значение скорости ветра, полученное с сервера
+    /// - Returns: Возвращаем результат в другой системе исчисления
     func calculateWindSpeed(measurementIndex: Int, value: Double) -> Int {
         var result = 0
         switch measurementIndex {

@@ -281,7 +281,7 @@ class MainWeatherViews {
     //MARK: -- Конфигурация элементов
     func configureWeatherImage(on view: UIView) {
         
-        background.configure(on: view)
+        //background.configure(on: view)
         
         view.addSubview(collectionView)
         view.addSubview(weatherImage)
@@ -361,14 +361,27 @@ class MainWeatherViews {
         collectionView.heightAnchor.constraint(equalToConstant: 110).isActive = true
     }
     
+    
+    //MARK: - как правильно? тут смущает, что есть взаимодействие view с моделью, что запрещено по MVC
     func setupData(items: ForecastModel) {
-        weatherImage.image = WeatherImages.shared.weatherImages(id: items.id ?? 803, pod: calendar.component(.hour, from: Date()) >= 20 ? "n" : "d")
+        weatherImage.image = WeatherImages.shared.weatherImages(id: items.id ?? 803, pod: items.dayOrNight ?? "d")
         temperatureLabel.text = "\(Int(items.temp?.rounded() ?? 0.0))°"
         pressureLabel.text = "\(Int(items.pressure ?? 0.0)) \(UserDefaults.standard.string(forKey: "pressureTitle") ?? "мм.рт.ст.")"
         humidityLabel.text = "\(Int(items.humidity ?? 0))%"
         weatherDescription.text = (items.weatherDescription?.prefix(1).uppercased() ?? "") + ((items.weatherDescription?.lowercased().dropFirst() ?? ""))
         cityLabel.text = items.cityName
         windLabel.text = "\(Int(items.windSpeed?.rounded() ?? 0.0)) \(UserDefaults.standard.string(forKey: "windTitle") ?? "м/с")"
+    }
+    
+    //MARK: - или так? Смущает, что много параметров входных, ведь можно же просто передать модель, как в функции выше
+    func configureData(image: UIImage, temperature: Int, pressure: Int, humidity: Int, weatherDescription: String, city: String, windSpeed: Int) {
+        weatherImage.image = image
+        temperatureLabel.text = "\(Int(temperature))°"
+        pressureLabel.text = "\(Int(pressure)) \(UserDefaults.standard.string(forKey: "pressureTitle") ?? "мм.рт.ст.")"
+        humidityLabel.text = "\(Int(humidity))%"
+        self.weatherDescription.text = weatherDescription
+        cityLabel.text = city
+        windLabel.text = "\(Int(windSpeed)) \(UserDefaults.standard.string(forKey: "windTitle") ?? "м/с")"
     }
 }
 

@@ -10,30 +10,37 @@ import Foundation
 class ForecastManager {
     static let shared = ForecastManager()
 
+    
+    /// Функция для получения прогноза погоды на сутки по координатам
+    /// - Parameters:
+    ///   - latitude: широта
+    ///   - longtitude: долгота
+    ///   - completion: модель прогноза погоды
     func getForecastWithCoordinates(latitude: Double, longtitude: Double, completion: @escaping ([ForecastModel]) -> Void) {
         
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longtitude)&units=\(UserDefaults.standard.string(forKey: "units") ?? "metric")&lang=ru&appid=\(APIKey.APIKey)") else { return }
         let request = URLRequest(url: url)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data else { return }
+            
             if let forecast = try? JSONDecoder().decode(Forecast.self, from: data) {
 
-                var tupleForecastData = [ForecastModel]()
+                var forecastData = [ForecastModel]()
                 
                 let first8Items = forecast.list?.prefix(8) // берем первые 8 значений из JSON
                 
-                //проходимся по массиву из 8 элементов, отделяем от даты только время и добавляем нужные данные в кортеж
+                //проходимся по массиву из 8 элементов, отделяем от даты только время и добавляем нужные данные в массив
                 for i in first8Items! {
                     let date = i.dtTxt?.components(separatedBy: "-")
                     let separatedDate = String(date?[2].components(separatedBy: " ").dropFirst().joined().prefix(5) ?? "")
-                    tupleForecastData.append(ForecastModel(id: i.weather?.first?.id ?? 803, 
+                    forecastData.append(ForecastModel(id: i.weather?.first?.id ?? 803, 
                                                            dayOrNight: i.sys?.pod?.rawValue ?? "d",
                                                            temp: i.main?.temp ?? 0,
                                                            tempMin: i.main?.tempMin ?? 0.0,
                                                            tempMax: i.main?.tempMax ?? 0.0,
                                                            date: separatedDate))
                 }
-                    completion((tupleForecastData))
+                    completion((forecastData))
             } else {
                 print("failed parsing JSON")
             }
@@ -41,6 +48,12 @@ class ForecastManager {
         task.resume()
     }
     
+    
+    /// Отдельная функция для получения прогноза погоды на КАЖДЫЙ день (без разделения прогноза по 3 часа)
+    /// - Parameters:
+    ///   - latitude: широта
+    ///   - longtitude: долгтоа
+    ///   - completion: модель прогноза погоды
     func getForecast(latitude: Double, longtitude: Double, completion: @escaping ([ForecastModel]) -> Void) {
         
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longtitude)&units=\(UserDefaults.standard.string(forKey: "units") ?? "metric")&lang=ru&appid=\(APIKey.APIKey)") else { return }
@@ -84,7 +97,7 @@ class ForecastManager {
                         }
                     }
                     
-//                     Добаввляем полученную инфу в массив кортежей
+//                     Добаввляем полученную инфу в массив
                     for data in filteredData! {
                         df.dateFormat = "EEEE" // день недели
                         df.locale = Locale(identifier: "ru_RU")

@@ -268,7 +268,7 @@ class ForecastViews {
     
     func setupData(items: [ForecastModel]) {
         maxTemperatureLabel.text = "\(Int(items.last?.tempMax?.rounded() ?? 0.0))°"
-        minTemperaureLabel.text = " /\(Int(items.last?.tempMin?.rounded() ?? 0.0))°"
+        minTemperaureLabel.text = "/\(Int(items.last?.tempMin?.rounded() ?? 0.0))°"
         weatherImage.image = WeatherImages.shared.weatherImages(id: items.last?.id ?? 803, pod: items.last?.dayOrNight)
         humidityLabel.text = "\(items.last?.humidity ?? 0)%"
         pressureLabel.text = "\(Int(items.last?.pressure?.rounded() ?? 0)) \(UserDefaults.standard.string(forKey: "pressureTitle") ?? "мм.рт.ст.")"

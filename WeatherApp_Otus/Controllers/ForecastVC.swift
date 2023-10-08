@@ -40,7 +40,13 @@ final class ForecastVC: UIViewController {
         }
         
         DispatchQueue.main.async {
-            self.forecastViews.setupData(items: self.forecastModel)
+            //self.forecastViews.setupData(items: self.forecastModel)
+            self.forecastViews.maxTemperatureLabel.text = "\(Int(self.forecastModel.last?.tempMax?.rounded() ?? 0.0))°"
+            self.forecastViews.minTemperaureLabel.text = "/\(Int(self.forecastModel.last?.tempMin?.rounded() ?? 0.0))°"
+            self.forecastViews.weatherImage.image = WeatherImages.shared.weatherImages(id: self.forecastModel.last?.id ?? 803, pod: self.forecastModel.last?.dayOrNight)
+            self.forecastViews.humidityLabel.text = "\(self.forecastModel.last?.humidity ?? 0)%"
+            self.forecastViews.pressureLabel.text = "\(Int(self.forecastModel.last?.pressure?.rounded() ?? 0.0)) \(UserDefaults.standard.string(forKey: "pressureTitle") ?? "мм.рт.ст.")"
+            self.forecastViews.windLabel.text = "\(Int(self.forecastModel.last?.windSpeed?.rounded() ?? 0)) \(UserDefaults.standard.string(forKey: "windTitle") ?? "м/с")"
         }
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -72,7 +78,12 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ForecastTableViewCell.cellID, for: indexPath) as! ForecastTableViewCell
-        cell.setupData(items: weather, indexPath: indexPath)
+        cell.weatherDescription.text = "".configureWeatherDescription(info: weather[indexPath.section].weatherDescription ?? "")
+        cell.dayLabel.text = weather[indexPath.section].date?.capitalized
+        cell.minTemp.text = "\(Int(weather[indexPath.section].tempMin?.rounded() ?? 0.0))°"
+        cell.maxTemp.text = "\(Int(weather[indexPath.section].tempMax?.rounded() ?? 0.0))°"
+        cell.weatherImage.image = WeatherImages.shared.weatherImages(id: weather[indexPath.section].id ?? 803, pod: weather[indexPath.section].dayOrNight ?? "d")
+        //cell.setupData(items: weather, indexPath: indexPath)
         return cell
     }
     
