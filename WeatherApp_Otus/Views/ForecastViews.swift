@@ -209,7 +209,8 @@ class ForecastViews {
     
     
     func configure(on view: UIView) {
-        background.configure(on: view)
+        //background.configure(on: view)
+        view.backgroundColor = UIColor(red: 0.28, green: 0.19, blue: 0.62, alpha: 1)
         
         view.addSubview(tableView)
         view.addSubview(weatherView)

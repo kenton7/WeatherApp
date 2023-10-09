@@ -15,7 +15,7 @@ final class SettingsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        background.configure(on: self.view)
+        //background.configure(on: self.view)
         settingsVC.configure(on: self.view)
         settingsVC.tableView.dataSource = self
         settingsVC.tableView.delegate = self

@@ -19,6 +19,7 @@ class Background: UIView {
         return view
     }()
     
+    
 //    private var layer0: CALayer = {
 //        let layer = CALayer()
 //        layer.contents = UIImage(named: "BackgroundImage")

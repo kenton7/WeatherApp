@@ -34,6 +34,7 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         //view.animateBackground(image: UIImage(named: "nightSky")!, on: view)
         weatherUIElements.configureWeatherImage(on: self.view)
         
+        
         weatherUIElements.refreshButton.addTarget(self, action: #selector(refreshButtonPressed), for: .touchUpInside)
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestAlwaysAuthorization()
@@ -91,9 +92,9 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
                 if weatherModel.dayOrNight == "n" {
                     self?.view.animateBackground(image: UIImage(named: "nightSky")!, on: self!.view)
                 } else {
-                    self?.view.animateBackground(image: UIImage(named: "BackgroundImage")!, on: self!.view)
+                self?.view.animateBackground(image: UIImage(named: "BackgroundImage")!, on: self!.view)
                 }
-                
+            
                 self?.weatherUIElements.spinner.isHidden = true
                 self?.weatherUIElements.spinner.stopAnimation()
                 self?.weatherUIElements.collectionView.reloadData()

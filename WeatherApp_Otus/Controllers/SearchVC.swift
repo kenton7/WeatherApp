@@ -34,6 +34,7 @@ final class SearchVC: UIViewController {
         view.addGestureRecognizer(tap)
         tap.cancelsTouchesInView = false // позволяет делать тап по ячейке. Настройка нужна, потому что есть жест
         uiElements.configureUIOn(view: view)
+        view.backgroundColor = UIColor(red: 0.11, green: 0.16, blue: 0.22, alpha: 1)
         uiElements.tableView.dataSource = self
         uiElements.tableView.delegate = self
         uiElements.searchBar.delegate = self

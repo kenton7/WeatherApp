@@ -59,7 +59,7 @@ class SearchScreenViews {
     
     //MARK: - Constraints
     func configureUIOn(view: UIView) {
-        background.configure(on: view)
+        //background.configure(on: view)
         view.addSubview(locationButton)
         view.addSubview(searchBar)
         view.addSubview(tableView)
