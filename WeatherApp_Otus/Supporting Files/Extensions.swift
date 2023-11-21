@@ -67,7 +67,6 @@ extension String {
     func configureWeatherDescription(info: String) -> String {
         
         var finalStr = ""
-        
         let separatedDescription = info.components(separatedBy: " ")
         let finalDescription = "\(separatedDescription[0].capitalized )\n\(separatedDescription.last ?? "")"
         
@@ -81,12 +80,27 @@ extension String {
         
         return finalStr
     }
+    
+    func capitalizingFirstLetter() -> String {
+       return prefix(1).uppercased() + self.lowercased().dropFirst()
+     }
+
+     mutating func capitalizeFirstLetter() {
+       self = self.capitalizingFirstLetter()
+     }
 }
 
 //MARK: - UIView
 extension UIView {
-    static var viewHasAdded = false
     func animateBackground(image: UIImage, on view: UIView) {
+        
+        //фильтруем subviews по тегам, чтобы удалить только картинки заднего фона при повторном запуске фукнкции
+        view.subviews.filter {
+            $0.tag == 100 || $0.tag == 101
+        }.forEach {
+            $0.removeFromSuperview()
+        }
+        
         // ширина экрана
         let imageViewWidth = view.frame.size.width
         // высота экрана
@@ -95,16 +109,14 @@ extension UIView {
         
         let backgroundImageView1 = UIImageView(image: image)
         backgroundImageView1.frame = CGRect(x: 0, y: 0, width: imageViewWidth, height: imageViewHeight)
+        backgroundImageView1.tag = 100 // устанавливаем тег для первого изображения
+        view.insertSubview(backgroundImageView1, at: 0)
         
         let backgroundImageView2 = UIImageView(image: image)
         backgroundImageView2.frame = CGRect(x: imageViewWidth, y: 0, width: imageViewWidth, height: imageViewHeight)
         backgroundImageView2.transform = CGAffineTransform(scaleX: -1, y: 1) // отзеркаливаем вторую картинку, чтобы создать иллюзию бесшовного перехода
-        
-        if !UIView.viewHasAdded {
-            UIView.viewHasAdded = true
-            view.insertSubview(backgroundImageView1, at: 0)
-            view.insertSubview(backgroundImageView2, at: 0)
-        }
+        backgroundImageView2.tag = 101 // устанавливаем тег для второго изображения
+        view.insertSubview(backgroundImageView2, at: 0)
         
         func animateImage() {
             UIView.animate(withDuration: 30.0, delay: 0.0, options: [.curveLinear], animations: {
@@ -141,3 +153,4 @@ extension UIView {
         animateImage()
     }
 }
+

@@ -8,9 +8,9 @@
 import UIKit
 import CoreLocation
 
-final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    private let weatherUIElements = MainWeatherViews()
+    private let weatherUIElements = WeatherViews()
     private var locationManager = CLLocationManager()
     
     private var weatherModel = [ForecastModel]() {
@@ -24,20 +24,13 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
     
     private var coordinates: Coordinates?
     
+    override func loadView() {
+        super.loadView()
+        view = weatherUIElements
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        weatherUIElements.collectionView.dataSource = self
-        weatherUIElements.collectionView.delegate = self
-        //weatherUIElements.animateBackground(image: UIImage(named: "BackgroundImage")!, on: view)
-        //animateBackground(image: UIImage(named: "BackgroundImage")!, on: view)
-        //view.animateBackground(image: UIImage(named: "nightSky")!, on: view)
-        weatherUIElements.configureWeatherImage(on: self.view)
-        
-        
-        weatherUIElements.refreshButton.addTarget(self, action: #selector(refreshButtonPressed), for: .touchUpInside)
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestAlwaysAuthorization()
         
         DispatchQueue.global().async {
             if CLLocationManager.locationServicesEnabled() {
@@ -46,10 +39,17 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
                 self.locationManager.startUpdatingLocation()
             }
         }
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestAlwaysAuthorization()
+        
+        weatherUIElements.collectionView.dataSource = self
+        weatherUIElements.collectionView.delegate = self
+        weatherUIElements.refreshButton.addTarget(self, action: #selector(refreshButtonPressed), for: .touchUpInside)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        sleep(UInt32(0.5))
         getCurrentWeather()
         getForecast()
     }
@@ -58,7 +58,7 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
-
+    
     
     //MARK: -- Добавляем действие на кнопки
     @objc private func refreshButtonPressed() {
@@ -79,25 +79,37 @@ final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionVi
     
     private func getCurrentWeather() {
         CurrentWeatherManager.shared.getWeather(latitude: coordinates?.latitude ?? 0.0, longtitude: coordinates?.longitude ?? 0.0) { [weak self] weatherModel in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                //self?.weatherUIElements.setupData(items: weatherModel)
-                self?.weatherUIElements.configureData(image: WeatherImages.shared.weatherImages(id: weatherModel.id ?? 803, pod: weatherModel.dayOrNight),
+                self.weatherUIElements.configureData(image: WeatherImages.shared.weatherImages(id: weatherModel.id ?? 803,
+                                                                                                pod: weatherModel.dayOrNight),
                                                       temperature: Int(weatherModel.temp ?? 0.0),
-                                                      pressure: Int(weatherModel.pressure ?? 0.0),
+                                                      pressure: CalculateMeasurements.shared.calculatePressure(measurementIndex: UserDefaults.standard.integer(forKey: "pressureIndex"), value: weatherModel.pressureFromServer ?? 0),
                                                       humidity: weatherModel.humidity ?? 0,
-                                                      weatherDescription: (weatherModel.weatherDescription?.prefix(1).uppercased() ?? "") + ((weatherModel.weatherDescription?.lowercased().dropFirst() ?? "")),
+                                                      weatherDescription: weatherModel.weatherDescriptionFromServer,
                                                       city: weatherModel.cityName ?? "",
-                                                      windSpeed: Int(weatherModel.windSpeed ?? 0.0))
+                                                      windSpeed: CalculateMeasurements.shared.calculateWindSpeed(measurementIndex: UserDefaults.standard.integer(forKey: "winIndex"), value: weatherModel.windSpeedFromServer ?? 0.0))
                 
-                if weatherModel.dayOrNight == "n" {
-                    self?.view.animateBackground(image: UIImage(named: "nightSky")!, on: self!.view)
-                } else {
-                self?.view.animateBackground(image: UIImage(named: "BackgroundImage")!, on: self!.view)
+                switch weatherModel.dayOrNight {
+                case "n":
+                    if let nightImage = UIImage(named: "nightSky") {
+                        self.view.animateBackground(image: nightImage, on: self.view)
+                    } else {
+                        print("There's no image with such name")
+                    }
+                case "d":
+                    if let dayImage = UIImage(named: "BackgroundImage") {
+                        self.view.animateBackground(image: dayImage, on: self.view)
+                    } else {
+                        print("There's no image with such name")
+                    }
+                default:
+                    break
                 }
             
-                self?.weatherUIElements.spinner.isHidden = true
-                self?.weatherUIElements.spinner.stopAnimation()
-                self?.weatherUIElements.collectionView.reloadData()
+                self.weatherUIElements.spinner.isHidden = true
+                self.weatherUIElements.spinner.stopAnimation()
+                self.weatherUIElements.collectionView.reloadData()
             }
         }
     }
@@ -140,6 +152,8 @@ extension MainVC: CLLocationManagerDelegate {
         if status == .authorizedWhenInUse {
             locationManager.requestLocation()
             DispatchQueue.main.async {
+                self.getForecast()
+                self.getCurrentWeather()
                 self.weatherUIElements.spinner.isHidden = false
                 self.weatherUIElements.spinner.startAnimation(delay: 0.06, replicates: 20)
             }

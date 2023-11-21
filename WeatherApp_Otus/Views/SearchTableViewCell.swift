@@ -12,7 +12,6 @@ class SearchTableViewCell: UITableViewCell {
     
     static let cellID = "SearchTableViewCell"
     
-    
     let weatherImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -27,14 +26,12 @@ class SearchTableViewCell: UITableViewCell {
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
-        //label.font = UIFont(name: "Poppins-SemiBold", size: 12)
         label.font = UIFont.boldSystemFont(ofSize: 15)
         return label
     }()
     
     let weatherDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Преимущественно \nсолнечно"
         label.textAlignment = .justified
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -100,32 +97,17 @@ class SearchTableViewCell: UITableViewCell {
         ])
     }
     
-    func setupData(items: Results<ForecastRealm>?, indexPath: IndexPath) {
-        guard let items = items else { return }
-        cityLabel.text = items[indexPath.section].cityName
-        weatherDescriptionLabel.text = items[indexPath.section].weatherDescription.prefix(1).uppercased() + "\(items[indexPath.section].weatherDescription.lowercased().dropFirst())"
-        weatherImage.image = WeatherImages.shared.weatherImages(id: items[indexPath.section].id, pod: items[indexPath.section].dayOrNight)
-        temperatureLabel.text = "\(Int(items[indexPath.section].temp.rounded()))°"
-    }
+//    func setupData(items: Results<ForecastRealm>?, indexPath: IndexPath) {
+//        guard let items = items else { return }
+//        cityLabel.text = items[indexPath.section].cityName
+//        weatherDescriptionLabel.text = items[indexPath.section].weatherDescription.prefix(1).uppercased() + "\(items[indexPath.section].weatherDescription.lowercased().dropFirst())"
+////        weatherDescriptionLabel.text = "".configureWeatherDescription(info: items[indexPath.section].weatherDescription.prefix(1).uppercased() +
+////                                                                      "\(items[indexPath.section].weatherDescription.lowercased().dropFirst())")
+//        weatherImage.image = WeatherImages.shared.weatherImages(id: items[indexPath.section].id, pod: items[indexPath.section].dayOrNight)
+//        temperatureLabel.text = "\(Int(items[indexPath.section].temp.rounded()))°"
+//    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        isUserInteractionEnabled = true
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        isUserInteractionEnabled = true
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

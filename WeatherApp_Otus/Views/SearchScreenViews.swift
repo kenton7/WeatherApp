@@ -7,11 +7,9 @@
 
 import UIKit
 
-class SearchScreenViews {
+final class SearchScreenViews: WeatherViews {
     
     //MARK: - Views
-    
-    private let background = Background()
     
     let locationButton: UIButton = {
        let button = UIButton()
@@ -30,7 +28,6 @@ class SearchScreenViews {
         let searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.layer.cornerRadius = 15
-        //searchBar.barStyle = .default
         searchBar.searchTextField.backgroundColor = UIColor(red: 0.322, green: 0.239, blue: 0.498, alpha: 1)
         searchBar.barTintColor = UIColor(red: 0.322, green: 0.239, blue: 0.498, alpha: 1)
         searchBar.searchTextField.attributedPlaceholder =  NSAttributedString.init(string: "Поиск города", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15)])
@@ -50,36 +47,36 @@ class SearchScreenViews {
         return tableView
     }()
     
-    lazy var spinner: CustomLoaderView = {
-        let spinner = CustomLoaderView(squareLength: 100)
-        spinner.isHidden = true
-        return spinner
-    }()
-    
-    
-    //MARK: - Constraints
-    func configureUIOn(view: UIView) {
-        //background.configure(on: view)
-        view.addSubview(locationButton)
-        view.addSubview(searchBar)
-        view.addSubview(tableView)
-        view.addSubview(spinner)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
+        configureViews()
+    }
+    
+    override func configureViews() {
+        addSubview(locationButton)
+        addSubview(searchBar)
+        addSubview(tableView)
+        addSubview(spinner)
         
         NSLayoutConstraint.activate([
             locationButton.widthAnchor.constraint(equalToConstant: 55),
             locationButton.heightAnchor.constraint(equalToConstant: 55),
-            locationButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            locationButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            locationButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            locationButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
             
             searchBar.centerYAnchor.constraint(equalTo: locationButton.centerYAnchor),
-            searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            searchBar.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             searchBar.trailingAnchor.constraint(equalTo: locationButton.safeAreaLayoutGuide.leadingAnchor, constant: -10),
             
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
             tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

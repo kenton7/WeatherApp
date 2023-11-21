@@ -20,31 +20,11 @@ class SettingsTableViewCell: UITableViewCell {
     
     let temperatureLabel: UILabel = {
        let label = UILabel()
-        label.text = ""
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 15)
         return label
-    }()
-    
-    let segmentedControlForWind: UISegmentedControl = {
-        var segmentedControl = UISegmentedControl()
-        segmentedControl = UISegmentedControl(items: ["м/с", "км/ч", "ми/ч"])
-        segmentedControl.selectedSegmentIndex = 0
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.backgroundColor = .white
-        segmentedControl.tintColor = .blue
-        return segmentedControl
-    }()
-    
-    let segmetedControlForPressure: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl(items: ["мм.рт.ст.", "гПа", "д.рт.ст."])
-        segmentedControl.selectedSegmentIndex = 0
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.backgroundColor = .white
-        segmentedControl.tintColor = .blue
-        return segmentedControl
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -61,13 +41,6 @@ class SettingsTableViewCell: UITableViewCell {
             temperatureLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),
             temperatureLabel.heightAnchor.constraint(equalToConstant: 30),
             temperatureLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            
-//            segmentedControlForWind.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),
-//            segmentedControlForWind.centerYAnchor.constraint(equalTo: centerYAnchor),
-//            segmentedControlForWind.widthAnchor.constraint(equalTo: segmetedControlForPressure.widthAnchor),
-//            
-//            segmetedControlForPressure.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
-//            segmetedControlForPressure.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10)
         ])
     }
     
@@ -86,11 +59,11 @@ class SettingsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let margins = UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 8)
-        contentView.frame = contentView.frame.inset(by: margins)
-        contentView.layer.cornerRadius = 8
-    }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        let margins = UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 8)
+//        contentView.frame = contentView.frame.inset(by: margins)
+//        contentView.layer.cornerRadius = 8
+//    }
 
 }

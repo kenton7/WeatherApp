@@ -8,12 +8,25 @@
 import UIKit
 import Foundation
 
-class MainWeatherViews {
-    
-    private let calendar = Calendar.current
+protocol IWeather {
+    var weatherImage: UIImageView { get set }
+    var weatherDescription: UILabel { get set }
+    var temperatureLabel: UILabel { get set }
+    var cityLabel: UILabel { get set }
+    var pressureImage: UIImageView { get }
+    var pressureLabel: UILabel { get set }
+    var pressureName: UILabel { get }
+    var humidityImage: UIImageView { get }
+    var humidityLabel: UILabel { get set }
+    var humidityName: UILabel { get }
+    var windImage: UIImageView { get }
+    var windLabel: UILabel { get set }
+    var windName: UILabel { get }
+}
+
+class WeatherViews: UIView, IWeather {
     
     //MARK: -- UI Elements
-    private let background = Background()
     
     var weatherImage: UIImageView = {
         let image = UIImageView()
@@ -29,7 +42,6 @@ class MainWeatherViews {
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
-        //label.font = UIFont(name: "Poppins-SemiBold", size: 12)
         label.font = UIFont.boldSystemFont(ofSize: 15)
         return label
     }()
@@ -90,7 +102,7 @@ class MainWeatherViews {
         return label
     }()
     
-    private let pressureImage: UIImageView = {
+    let pressureImage: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(named: "pressure")
@@ -98,7 +110,7 @@ class MainWeatherViews {
         return view
     }()
     
-    let pressureLabel: UILabel = {
+    var pressureLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "--"
@@ -108,7 +120,7 @@ class MainWeatherViews {
         return label
     }()
     
-    private let pressureName: UILabel = {
+    let pressureName: UILabel = {
         let label = UILabel()
         label.text = "Давление"
         label.font = UIFont.boldSystemFont(ofSize: 15)
@@ -119,7 +131,7 @@ class MainWeatherViews {
         return label
     }()
     
-    private let humidityImage: UIImageView = {
+    let humidityImage: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(named: "insurance 1 (1)")
@@ -127,7 +139,7 @@ class MainWeatherViews {
         return view
     }()
     
-    let humidityLabel: UILabel = {
+    var humidityLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "--"
@@ -137,7 +149,7 @@ class MainWeatherViews {
         return label
     }()
     
-    private let humidityName: UILabel = {
+    let humidityName: UILabel = {
         let label = UILabel()
         label.text = "Влажность"
         label.font = UIFont.boldSystemFont(ofSize: 15)
@@ -148,7 +160,7 @@ class MainWeatherViews {
         return label
     }()
     
-    private let windImage: UIImageView = {
+    let windImage: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(named: "insurance 1 (2)")
@@ -156,7 +168,7 @@ class MainWeatherViews {
         return view
     }()
     
-    let windLabel: UILabel = {
+    var windLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "--"
@@ -166,7 +178,7 @@ class MainWeatherViews {
         return label
     }()
     
-    private let windName: UILabel = {
+    let windName: UILabel = {
         let label = UILabel()
         label.text = "Ветер"
         label.font = UIFont.boldSystemFont(ofSize: 15)
@@ -278,28 +290,35 @@ class MainWeatherViews {
         return spinner
     }()
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        configureViews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: -- Конфигурация элементов
-    func configureWeatherImage(on view: UIView) {
+    func configureViews() {
+
+        addSubview(collectionView)
+        addSubview(weatherImage)
+        addSubview(weatherDescription)
+        addSubview(temperatureLabel)
+        addSubview(cityLabel)
+        addSubview(refreshButton)
+        addSubview(dateLabel)
+        addSubview(detailStackView)
+        addSubview(weatherDataStackView)
+        addSubview(visibilityStackView)
+        addSubview(humidityStackView)
+        addSubview(winddStackView)
+        addSubview(sevenDaysForecast)
+        addSubview(todayLabel)
+        addSubview(spinner)
         
-        //background.configure(on: view)
-        
-        view.addSubview(collectionView)
-        view.addSubview(weatherImage)
-        view.addSubview(weatherDescription)
-        view.addSubview(temperatureLabel)
-        view.addSubview(cityLabel)
-        view.addSubview(refreshButton)
-        view.addSubview(dateLabel)
-        view.addSubview(detailStackView)
-        view.addSubview(weatherDataStackView)
-        view.addSubview(visibilityStackView)
-        view.addSubview(humidityStackView)
-        view.addSubview(winddStackView)
-        view.addSubview(sevenDaysForecast)
-        view.addSubview(todayLabel)
-        view.addSubview(spinner)
-        
-        //weatherDataStackView.addArrangedSubview(cityLabel)
         weatherDataStackView.addArrangedSubview(weatherDescription)
         weatherDataStackView.addArrangedSubview(weatherImage)
         weatherDataStackView.addArrangedSubview(temperatureLabel)
@@ -318,17 +337,17 @@ class MainWeatherViews {
         detailStackView.addArrangedSubview(humidityStackView)
         detailStackView.addArrangedSubview(winddStackView)
         
-        cityLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        cityLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        cityLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        cityLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         cityLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         refreshButton.centerYAnchor.constraint(equalTo: cityLabel.centerYAnchor).isActive = true
         refreshButton.heightAnchor.constraint(equalToConstant: 46).isActive = true
         refreshButton.widthAnchor.constraint(equalToConstant: 46).isActive = true
-        refreshButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        refreshButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
 
         weatherDescription.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        weatherDataStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        weatherDataStackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         weatherDescription.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 5).isActive = true
         
         weatherImage.widthAnchor.constraint(equalToConstant: 150).isActive = true
@@ -343,35 +362,35 @@ class MainWeatherViews {
 
         windImage.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
-        detailStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        detailStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        detailStackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
+        detailStackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        detailStackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        detailStackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9).isActive = true
         detailStackView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         detailStackView.topAnchor.constraint(equalTo: weatherDataStackView.safeAreaLayoutGuide.bottomAnchor, constant: 10).isActive = true
         
-        sevenDaysForecast.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        sevenDaysForecast.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
         sevenDaysForecast.topAnchor.constraint(equalTo: detailStackView.bottomAnchor, constant: 10).isActive = true
         
-        todayLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        todayLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         todayLabel.topAnchor.constraint(equalTo: detailStackView.bottomAnchor, constant: 10).isActive = true
         
         collectionView.topAnchor.constraint(equalTo: sevenDaysForecast.bottomAnchor, constant: 10).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         collectionView.heightAnchor.constraint(equalToConstant: 110).isActive = true
     }
     
     
     //MARK: - как правильно? тут смущает, что есть взаимодействие view с моделью, что запрещено по MVC
-    func setupData(items: ForecastModel) {
-        weatherImage.image = WeatherImages.shared.weatherImages(id: items.id ?? 803, pod: items.dayOrNight ?? "d")
-        temperatureLabel.text = "\(Int(items.temp?.rounded() ?? 0.0))°"
-        pressureLabel.text = "\(Int(items.pressure ?? 0.0)) \(UserDefaults.standard.string(forKey: "pressureTitle") ?? "мм.рт.ст.")"
-        humidityLabel.text = "\(Int(items.humidity ?? 0))%"
-        weatherDescription.text = (items.weatherDescription?.prefix(1).uppercased() ?? "") + ((items.weatherDescription?.lowercased().dropFirst() ?? ""))
-        cityLabel.text = items.cityName
-        windLabel.text = "\(Int(items.windSpeed?.rounded() ?? 0.0)) \(UserDefaults.standard.string(forKey: "windTitle") ?? "м/с")"
-    }
+//    func setupData(items: ForecastModel) {
+//        weatherImage.image = WeatherImages.shared.weatherImages(id: items.id ?? 803, pod: items.dayOrNight ?? "d")
+//        temperatureLabel.text = "\(Int(items.temp?.rounded() ?? 0.0))°"
+//        pressureLabel.text = "\(Int(items.pressureFromServer ?? 0)) \(UserDefaults.standard.string(forKey: "pressureTitle") ?? "мм.рт.ст.")"
+//        humidityLabel.text = "\(Int(items.humidity ?? 0))%"
+//        weatherDescription.text = items.weatherDescriptionFromServer.capitalizingFirstLetter()
+//        cityLabel.text = items.cityName
+//        windLabel.text = "\(Int(items.windSpeedFromServer ?? 0)) \(UserDefaults.standard.string(forKey: "windTitle") ?? "м/с")"
+//    }
     
     //MARK: - или так? Смущает, что много параметров входных, ведь можно же просто передать модель, как в функции выше
     func configureData(image: UIImage, temperature: Int, pressure: Int, humidity: Int, weatherDescription: String, city: String, windSpeed: Int) {

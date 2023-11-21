@@ -13,6 +13,11 @@ final class ForecastVC: UIViewController {
     var forecastModel = [ForecastModel]()
     var coordinates: Coordinates?
     
+    override func loadView() {
+        super.loadView()
+        view = forecastViews
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,7 +28,6 @@ final class ForecastVC: UIViewController {
         ]
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
-        forecastViews.configure(on: view)
         forecastViews.tableView.delegate = self
         forecastViews.tableView.dataSource = self
     }
@@ -45,8 +49,8 @@ final class ForecastVC: UIViewController {
             self.forecastViews.minTemperaureLabel.text = "/\(Int(self.forecastModel.last?.tempMin?.rounded() ?? 0.0))°"
             self.forecastViews.weatherImage.image = WeatherImages.shared.weatherImages(id: self.forecastModel.last?.id ?? 803, pod: self.forecastModel.last?.dayOrNight)
             self.forecastViews.humidityLabel.text = "\(self.forecastModel.last?.humidity ?? 0)%"
-            self.forecastViews.pressureLabel.text = "\(Int(self.forecastModel.last?.pressure?.rounded() ?? 0.0)) \(UserDefaults.standard.string(forKey: "pressureTitle") ?? "мм.рт.ст.")"
-            self.forecastViews.windLabel.text = "\(Int(self.forecastModel.last?.windSpeed?.rounded() ?? 0)) \(UserDefaults.standard.string(forKey: "windTitle") ?? "м/с")"
+            self.forecastViews.pressureLabel.text = "\(CalculateMeasurements.shared.calculatePressure(measurementIndex: UserDefaults.standard.integer(forKey: "pressureIndex"), value: (Int(self.forecastModel.last?.pressureFromServer ?? 0)))) \(UserDefaults.standard.string(forKey: MeasurementsTypes.pressure.rawValue) ?? "мм.рт.ст.")"
+            self.forecastViews.windLabel.text = "\(CalculateMeasurements.shared.calculateWindSpeed(measurementIndex: UserDefaults.standard.integer(forKey: "windIndex"), value: self.forecastModel.last?.windSpeedFromServer ?? 0)) \(UserDefaults.standard.string(forKey: MeasurementsTypes.wind.rawValue) ?? "м/с")"
         }
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -59,6 +63,14 @@ final class ForecastVC: UIViewController {
     private var weather = [ForecastModel]() {
         didSet {
             DispatchQueue.main.async {
+                
+                //TODO: - очень сильно начинает нагружаться процессор
+//                if self.weather.last!.dayOrNight == "n" {
+//                    self.view.animateBackground(image: UIImage(named: "nightSky")!, on: self.view)
+//                } else {
+//                    self.view.animateBackground(image: UIImage(named: "BackgroundImage")!, on: self.view)
+//                }
+                
                 self.forecastViews.tableView.reloadData()
                 self.forecastViews.spinner.isHidden = true
             }
@@ -78,7 +90,7 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ForecastTableViewCell.cellID, for: indexPath) as! ForecastTableViewCell
-        cell.weatherDescription.text = "".configureWeatherDescription(info: weather[indexPath.section].weatherDescription ?? "")
+        cell.weatherDescription.text = weather[indexPath.section].weatherDescriptionComputed
         cell.dayLabel.text = weather[indexPath.section].date?.capitalized
         cell.minTemp.text = "\(Int(weather[indexPath.section].tempMin?.rounded() ?? 0.0))°"
         cell.maxTemp.text = "\(Int(weather[indexPath.section].tempMax?.rounded() ?? 0.0))°"

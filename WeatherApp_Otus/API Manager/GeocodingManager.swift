@@ -15,10 +15,10 @@ class GeocodingManager {
     /// - Parameters:
     ///   - city: Город
     ///   - completion: в комплишине используем модель прогноза погоды
-    func search(city: String, completion: @escaping ((ForecastModel)) -> Void) {
+    func search(city: String, completion: @escaping (ForecastModel) -> Void) {
         guard let url = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(city)&limit=1&appid=\(APIKey.APIKey)") else { return }
         let request = URLRequest(url: url)
-        let task = URLSession.shared.dataTask(with: request, completionHandler:  { data, response, error in
+        let task = URLSession.shared.dataTask(with: request, completionHandler:  { data, _, _ in
             guard let data = data else { return }
             
             if let geocoding = try? JSONDecoder().decode(Geocoding.self, from: data) {
@@ -31,15 +31,15 @@ class GeocodingManager {
                 CurrentWeatherManager.shared.getWeather(latitude: latitude, longtitude: longitude) { forecastModel in
                     completion((ForecastModel(latitude: latitude,
                                               longitude: longitude,
-                                              weatherDescription: forecastModel.weatherDescription,
+                                              weatherDescriptionFromServer: forecastModel.weatherDescriptionFromServer,
                                               id: forecastModel.id,
                                               dayOrNight: String(forecastModel.dayOrNight ?? "d"),
                                               temp: forecastModel.temp,
                                               tempMin: forecastModel.tempMin,
                                               tempMax: forecastModel.tempMax,
-                                              pressure: Double(forecastModel.pressure ?? 0 ),
-                                              humidity: forecastModel.humidity ,
-                                              windSpeed: forecastModel.windSpeed ,
+                                              pressureFromServer: forecastModel.pressureFromServer,
+                                              humidity: forecastModel.humidity,
+                                              windSpeedFromServer: forecastModel.windSpeedFromServer,
                                               selectedItem: nil,
                                               cityName: geocoding.first?.localNames?["ru"],
                                               date: forecastModel.date)))

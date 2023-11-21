@@ -10,10 +10,9 @@ import UIKit
 class WeatherCollectionViewCell: UICollectionViewCell {
     
     static let cellID = "WeatherCollectionViewCell"
-    private let calendar = Calendar.current
     
     private let mainImageView: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.backgroundColor = .backgroundColorTabBar
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.alpha = 0.9
@@ -21,7 +20,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     }()
     
     let timeLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "--"
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 15)
@@ -31,7 +30,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     }()
     
     let weatherIcon: UIImageView = {
-       let image = UIImageView()
+        let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "sun")
         image.contentMode = .scaleAspectFit
@@ -39,7 +38,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     }()
     
     let temperatureLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "--"
         label.textColor = .white
         label.textAlignment = .center
@@ -49,7 +48,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     }()
     
     private let stackView: UIStackView = {
-       let view = UIStackView()
+        let view = UIStackView()
         view.axis = .vertical
         view.alignment = .center
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +61,6 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        //addSubview(mainImageView)
         addSubview(stackView)
         stackView.layer.cornerRadius = 8
         stackView.addArrangedSubview(timeLabel)
@@ -86,10 +84,10 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(items: [ForecastModel], indexPath: IndexPath) {
-            timeLabel.font = UIFont.boldSystemFont(ofSize: 15)
-            timeLabel.text = "\(items[indexPath.row].date ?? "")"
-            temperatureLabel.text = "\(Int(items[indexPath.row].temp?.rounded() ?? 0))°"
-            weatherIcon.image = WeatherImages.shared.weatherImages(id: items[indexPath.row].id ?? 803, pod: items[indexPath.row].dayOrNight)
+        timeLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        timeLabel.text = "\(items[indexPath.row].date ?? "")"
+        temperatureLabel.text = "\(Int(items[indexPath.row].temp?.rounded() ?? 0))°"
+        weatherIcon.image = WeatherImages.shared.weatherImages(id: items[indexPath.row].id ?? 803, pod: items[indexPath.row].dayOrNight)
     }
     
     required init?(coder: NSCoder) {

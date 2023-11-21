@@ -10,7 +10,6 @@ import Foundation
 class ForecastManager {
     static let shared = ForecastManager()
 
-    
     /// Функция для получения прогноза погоды на сутки по координатам
     /// - Parameters:
     ///   - latitude: широта
@@ -19,6 +18,7 @@ class ForecastManager {
     func getForecastWithCoordinates(latitude: Double, longtitude: Double, completion: @escaping ([ForecastModel]) -> Void) {
         
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longtitude)&units=\(UserDefaults.standard.string(forKey: "units") ?? "metric")&lang=ru&appid=\(APIKey.APIKey)") else { return }
+        print(url)
         let request = URLRequest(url: url)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data else { return }
@@ -33,7 +33,7 @@ class ForecastManager {
                 for i in first8Items! {
                     let date = i.dtTxt?.components(separatedBy: "-")
                     let separatedDate = String(date?[2].components(separatedBy: " ").dropFirst().joined().prefix(5) ?? "")
-                    forecastData.append(ForecastModel(id: i.weather?.first?.id ?? 803, 
+                    forecastData.append(ForecastModel(id: i.weather?.first?.id ?? 803,
                                                            dayOrNight: i.sys?.pod?.rawValue ?? "d",
                                                            temp: i.main?.temp ?? 0,
                                                            tempMin: i.main?.tempMin ?? 0.0,
@@ -57,10 +57,11 @@ class ForecastManager {
     func getForecast(latitude: Double, longtitude: Double, completion: @escaping ([ForecastModel]) -> Void) {
         
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longtitude)&units=\(UserDefaults.standard.string(forKey: "units") ?? "metric")&lang=ru&appid=\(APIKey.APIKey)") else { return }
+        print(url)
         let request = URLRequest(url: url)
         let calendar = Calendar.current
         let df = DateFormatter()
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = URLSession.shared.dataTask(with: request) { data, _, _ in
             guard let data else { return }
             if let forecast = try? JSONDecoder().decode(Forecast.self, from: data) {
 
@@ -103,7 +104,7 @@ class ForecastManager {
                         df.locale = Locale(identifier: "ru_RU")
                         df.timeZone = .current
                         let date = Date(timeIntervalSince1970: Double(data.dt ?? 0))
-                        forecastData.append(ForecastModel(weatherDescription: data.weather?[0].description ,id: data.weather?[0].id ?? 803, tempMin: data.main?.tempMin ?? 0, tempMax: data.main?.tempMax, date: "\(df.string(from: date))"))
+                        forecastData.append(ForecastModel(weatherDescriptionFromServer: data.weather?[0].description ?? "", id: data.weather?[0].id ?? 803, tempMin: data.main?.tempMin ?? 0, tempMax: data.main?.tempMax, date: "\(df.string(from: date))"))
                     }
                     completion((forecastData))
                 }

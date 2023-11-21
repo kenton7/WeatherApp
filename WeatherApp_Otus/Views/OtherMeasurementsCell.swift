@@ -13,7 +13,6 @@ class OtherMeasurementsCell: UITableViewCell {
     
     let parameterLabel: UILabel = {
        let label = UILabel()
-        label.text = ""
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
@@ -22,7 +21,11 @@ class OtherMeasurementsCell: UITableViewCell {
     }()
     
     let segmentedControlForWind: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl(items: ["м/с", "км/ч", "ми/ч"])
+        let segmentedControl = UISegmentedControl(items: [
+            MeasurementsTypes.metersPerSecond.rawValue,
+            MeasurementsTypes.kilometerPerHour.rawValue,
+            MeasurementsTypes.milesPerHour.rawValue
+        ])
         segmentedControl.selectedSegmentIndex = UserDefaults.standard.integer(forKey: "windIndex")
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 13)], for: .normal)
@@ -30,7 +33,11 @@ class OtherMeasurementsCell: UITableViewCell {
     }()
     
     let segmetedControlForPressure: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl(items: ["мм.рт.ст.", "гПа", "д.рт.ст."])
+        let segmentedControl = UISegmentedControl(items: [
+            MeasurementsTypes.mmRtSt.rawValue,
+            MeasurementsTypes.hPa.rawValue,
+            MeasurementsTypes.dRtSt.rawValue
+        ])
         segmentedControl.selectedSegmentIndex = UserDefaults.standard.integer(forKey: "pressureIndex")
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 13)], for: .normal)

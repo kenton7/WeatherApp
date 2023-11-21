@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsViews: UIView {
+class SettingsViews: WeatherViews {
 
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -19,15 +19,23 @@ class SettingsViews: UIView {
         return tableView
     }()
     
-    func configure(on view: UIView) {
-        view.addSubview(tableView)
-        view.backgroundColor = UIColor(red: 0.11, green: 0.16, blue: 0.22, alpha: 1)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configureViews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func configureViews() {
+        addSubview(tableView)
+        backgroundColor = UIColor(red: 0.11, green: 0.16, blue: 0.22, alpha: 1)
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+            tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
+            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
     }
-
 }

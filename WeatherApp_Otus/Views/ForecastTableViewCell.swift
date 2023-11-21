@@ -106,11 +106,12 @@ class ForecastTableViewCell: UITableViewCell {
     }
     
     func setupData(items: [ForecastModel], indexPath: IndexPath) {
-        weatherDescription.text = "".configureWeatherDescription(info: items[indexPath.section].weatherDescription ?? "")
+        //weatherDescription.text = "".configureWeatherDescription(info: items[indexPath.section].weatherDescription)
+        weatherDescription.text = items[indexPath.section].weatherDescriptionComputed
         dayLabel.text = items[indexPath.section].date?.capitalized
         minTemp.text = "\(Int(items[indexPath.section].tempMin?.rounded() ?? 0.0))°"
         maxTemp.text = "\(Int(items[indexPath.section].tempMax?.rounded() ?? 0.0))°"
-        weatherImage.image = WeatherImages.shared.weatherImages(id: items[indexPath.section].id ?? 803, pod: items[indexPath.section].dayOrNight ?? "d")
+        weatherImage.image = WeatherImages.shared.weatherImages(id: items[indexPath.section].id ?? 803, pod: items[indexPath.section].dayOrNight!)
     }
     
     required init?(coder: NSCoder) {

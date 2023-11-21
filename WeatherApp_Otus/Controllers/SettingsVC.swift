@@ -7,16 +7,31 @@
 
 import UIKit
 
+enum MeasurementsTypes: String {
+    case mmRtSt = "мм.рт.ст."
+    case hPa = "гПа"
+    case dRtSt = "д.рт.ст."
+    case metersPerSecond = "м/c"
+    case kilometerPerHour = "км/ч"
+    case milesPerHour = "ми/ч"
+    case mertic = "metric"
+    case imperial = "imperial"
+    case wind = "windTitle"
+    case pressure = "pressureTitle"
+}
+
 final class SettingsVC: UIViewController {
     
-    private let background = Background()
     private let settingsVC = SettingsViews()
     private var selectedIndexPath: Int?
+    
+    override func loadView() {
+        super.loadView()
+        view = settingsVC
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //background.configure(on: self.view)
-        settingsVC.configure(on: self.view)
         settingsVC.tableView.dataSource = self
         settingsVC.tableView.delegate = self
     }
@@ -28,13 +43,15 @@ final class SettingsVC: UIViewController {
     
     @objc private func windSegmentedControlPressed(segment: UISegmentedControl) {
         let selectedParameter = segment.titleForSegment(at: segment.selectedSegmentIndex)
-        UserDefaults.standard.set(selectedParameter, forKey: "windTitle")
+        UserDefaults.standard.set(selectedParameter, forKey: MeasurementsTypes.wind.rawValue)
         UserDefaults.standard.set(segment.selectedSegmentIndex, forKey: "windIndex")
+        print(segment.selectedSegmentIndex)
+        print(UserDefaults.standard.integer(forKey: "windIndex"))
     }
     
     @objc private func pressureSegmentedPressed(segment: UISegmentedControl) {
         let selectedParameter = segment.titleForSegment(at: segment.selectedSegmentIndex)
-        UserDefaults.standard.set(selectedParameter, forKey: "pressureTitle")
+        UserDefaults.standard.set(selectedParameter, forKey: MeasurementsTypes.pressure.rawValue)
         UserDefaults.standard.set(segment.selectedSegmentIndex, forKey: "pressureIndex")
     }
 }
@@ -112,9 +129,9 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             selectedIndexPath = indexPath.row
             
             if indexPath.row == 0 {
-                UserDefaults.standard.setValue("metric", forKey: "units")
+                UserDefaults.standard.setValue(MeasurementsTypes.mertic.rawValue, forKey: "units")
             } else {
-                UserDefaults.standard.setValue("imperial", forKey: "units")
+                UserDefaults.standard.setValue(MeasurementsTypes.imperial.rawValue, forKey: "units")
             }
             UserDefaults.standard.setValue(selectedIndexPath, forKey: "selectedItem")
             UserDefaults.standard.synchronize()
@@ -122,4 +139,3 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
