@@ -17,8 +17,7 @@ class ForecastManager {
     ///   - completion: модель прогноза погоды
     func getForecastWithCoordinates(latitude: Double, longtitude: Double, completion: @escaping ([ForecastModel]) -> Void) {
         
-        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longtitude)&units=\(UserDefaults.standard.string(forKey: "units") ?? "metric")&lang=ru&appid=\(APIKey.APIKey)") else { return }
-        print(url)
+        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longtitude)&units=\(UserDefaults.standard.string(forKey: "units") ?? "metric")&lang=ru&appid=\(APIKey.apiKey)") else { return }
         let request = URLRequest(url: url)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data else { return }
@@ -56,7 +55,7 @@ class ForecastManager {
     ///   - completion: модель прогноза погоды
     func getForecast(latitude: Double, longtitude: Double, completion: @escaping ([ForecastModel]) -> Void) {
         
-        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longtitude)&units=\(UserDefaults.standard.string(forKey: "units") ?? "metric")&lang=ru&appid=\(APIKey.APIKey)") else { return }
+        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longtitude)&units=\(UserDefaults.standard.string(forKey: "units") ?? "metric")&lang=ru&appid=\(APIKey.apiKey)") else { return }
         print(url)
         let request = URLRequest(url: url)
         let calendar = Calendar.current

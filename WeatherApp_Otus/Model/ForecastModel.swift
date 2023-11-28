@@ -24,7 +24,9 @@ struct ForecastModel {
             if separated.count == 2 {
                 finalStr = descriptionCapitalaized
             } else if separated.count == 3 {
-                finalStr = "\(separated[0].capitalized) \(separated[1]) \(separated.last ?? "")"
+                print("here")
+                finalStr = "\(separated[0].capitalized) \(separated[1])\n\(separated.last ?? "")"
+                print(finalStr)
             } else {
                 finalStr = weatherDescriptionFromServer.prefix(1).uppercased() + (weatherDescriptionFromServer.lowercased().dropFirst())
             }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsViews: WeatherViews {
+class SettingsViews: MainScreenViews {
 
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -15,7 +15,8 @@ class SettingsViews: WeatherViews {
         tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.cellID)
         tableView.backgroundColor = .clear
         tableView.showsVerticalScrollIndicator = false
-        tableView.separatorColor = .clear
+        tableView.separatorColor = .black
+        tableView.rowHeight = 60
         return tableView
     }()
     

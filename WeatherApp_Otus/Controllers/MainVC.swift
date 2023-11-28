@@ -8,9 +8,9 @@
 import UIKit
 import CoreLocation
 
-class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+final class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    private let weatherUIElements = WeatherViews()
+    private let weatherUIElements = MainScreenViews()
     private var locationManager = CLLocationManager()
     
     private var weatherModel = [ForecastModel]() {
@@ -49,6 +49,7 @@ class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         sleep(UInt32(0.5))
         getCurrentWeather()
         getForecast()
@@ -86,7 +87,7 @@ class MainVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
                                                       temperature: Int(weatherModel.temp ?? 0.0),
                                                       pressure: CalculateMeasurements.shared.calculatePressure(measurementIndex: UserDefaults.standard.integer(forKey: "pressureIndex"), value: weatherModel.pressureFromServer ?? 0),
                                                       humidity: weatherModel.humidity ?? 0,
-                                                      weatherDescription: weatherModel.weatherDescriptionFromServer,
+                                                     weatherDescription: weatherModel.weatherDescriptionFromServer.capitalizingFirstLetter(),
                                                       city: weatherModel.cityName ?? "",
                                                       windSpeed: CalculateMeasurements.shared.calculateWindSpeed(measurementIndex: UserDefaults.standard.integer(forKey: "winIndex"), value: weatherModel.windSpeedFromServer ?? 0.0))
                 

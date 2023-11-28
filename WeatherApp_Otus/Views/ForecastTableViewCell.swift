@@ -65,7 +65,7 @@ class ForecastTableViewCell: UITableViewCell {
         view.axis = .horizontal
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .center
-        //view.distribution = .equalSpacing
+        view.distribution = .equalSpacing
         return view
     }()
     
@@ -99,9 +99,12 @@ class ForecastTableViewCell: UITableViewCell {
             
             weatherImage.heightAnchor.constraint(equalToConstant: 40),
             weatherImage.widthAnchor.constraint(equalToConstant: 40),
-            maxTemp.widthAnchor.constraint(equalToConstant: 30),
-            minTemp.widthAnchor.constraint(equalToConstant: 30),
             maxTemp.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            //minTemp.leadingAnchor.constraint(equalTo: weatherDescription.trailingAnchor, constant: 5),
+            minTemp.trailingAnchor.constraint(equalTo: maxTemp.leadingAnchor, constant: -5),
+            //maxTemp.widthAnchor.constraint(equalToConstant: 50),
+            //minTemp.widthAnchor.constraint(equalToConstant: 50),
+            //maxTemp.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
         ])
     }
     

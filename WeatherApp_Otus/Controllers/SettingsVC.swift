@@ -83,10 +83,6 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
@@ -106,7 +102,6 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource {
             cell.parameterLabel.text = MeasureType.allCases[indexPath.row + 2].rawValue
             if indexPath.row == 0 {
                 cell.segmetedControlForPressure.isHidden = true
-                
                 if let value = UserDefaults.standard.value(forKey: "windIndex") {
                     let selectedIndex = value as! Int
                     cell.segmentedControlForWind.selectedSegmentIndex = selectedIndex

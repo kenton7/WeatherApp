@@ -18,7 +18,7 @@ class CurrentWeatherManager {
     ///   - longtitude: longitude
     ///   - completion: Model
     func getWeather(latitude: Double, longtitude: Double, completion: @escaping ((ForecastModel)) -> Void) {
-        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longtitude)&units=\(UserDefaults.standard.string(forKey: "units") ?? "metric")&lang=ru&appid=\(APIKey.APIKey)") else { return }
+        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longtitude)&units=\(UserDefaults.standard.string(forKey: "units") ?? "metric")&lang=ru&appid=\(APIKey.apiKey)") else { return }
         print(url)
         let request = URLRequest(url: url)
         let task = URLSession.shared.dataTask(with: request) { data, _, _ in

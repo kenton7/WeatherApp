@@ -24,7 +24,7 @@ protocol IWeather {
     var windName: UILabel { get }
 }
 
-class WeatherViews: UIView, IWeather {
+class MainScreenViews: UIView, IWeather {
     
     //MARK: -- UI Elements
     

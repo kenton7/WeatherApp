@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SearchScreenViews: WeatherViews {
+final class SearchScreenViews: MainScreenViews {
     
     //MARK: - Views
     

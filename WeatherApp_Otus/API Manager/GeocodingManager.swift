@@ -16,7 +16,7 @@ class GeocodingManager {
     ///   - city: Город
     ///   - completion: в комплишине используем модель прогноза погоды
     func search(city: String, completion: @escaping (ForecastModel) -> Void) {
-        guard let url = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(city)&limit=1&appid=\(APIKey.APIKey)") else { return }
+        guard let url = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(city)&limit=1&appid=\(APIKey.apiKey)") else { return }
         let request = URLRequest(url: url)
         let task = URLSession.shared.dataTask(with: request, completionHandler:  { data, _, _ in
             guard let data = data else { return }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ForecastViews: WeatherViews {
+class ForecastViews: MainScreenViews {
     
     let weatherView: UIView = {
         let view = UIView()
@@ -143,10 +143,10 @@ class ForecastViews: WeatherViews {
             weatherImage.heightAnchor.constraint(equalToConstant: 120),
             weatherImage.widthAnchor.constraint(equalToConstant: 120),
             
-            maxTemperatureLabel.leadingAnchor.constraint(equalTo: weatherImage.safeAreaLayoutGuide.trailingAnchor, constant: 30),
-            maxTemperatureLabel.topAnchor.constraint(equalTo: weatherView.safeAreaLayoutGuide.topAnchor, constant: 10),
-            minTemperaureLabel.leadingAnchor.constraint(equalTo: maxTemperatureLabel.safeAreaLayoutGuide.trailingAnchor, constant: 0),
-            minTemperaureLabel.topAnchor.constraint(equalTo: weatherView.safeAreaLayoutGuide.topAnchor, constant: 40),
+            maxTemperatureLabel.leadingAnchor.constraint(equalTo: weatherImage.trailingAnchor, constant: 16),
+            maxTemperatureLabel.topAnchor.constraint(equalTo: weatherView.topAnchor, constant: 10),
+            minTemperaureLabel.leadingAnchor.constraint(equalTo: maxTemperatureLabel.trailingAnchor, constant: 0),
+            minTemperaureLabel.topAnchor.constraint(equalTo: weatherView.topAnchor, constant: 40),
             
             humidityStackView.topAnchor.constraint(equalTo: pressureStackView.topAnchor),
             humidityImage.heightAnchor.constraint(equalToConstant: 24),
